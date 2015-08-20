@@ -1,0 +1,33 @@
+<section class="container champion">
+    <h2>Champion Build List</h2>
+    <div class="row">
+        <div class="item-set-info col-xs-12"
+             ng-repeat="build in championVm.builds"
+             ui-sref="build({buildId: build.id})">
+            <div>
+                <img class="build-rating" />
+                <div class="build-details">
+                    <div class="build-title" ng-bind="build.title | limitTo : 50"></div>
+                    <div class="build-author" ng-bind="build.author"></div>
+                    <span class="build-date" ng-bind="build.date"></span>
+                </div>
+                <div class="build-social">
+                    <div>
+                        <span class="champion-details-top-set-info-rating">
+                            <i class="fa fa-star fa-1"></i>
+                            <i class="fa fa-star fa-1"></i>
+                            <i class="fa fa-star fa-1"></i>
+                            <i class="fa fa-star fa-1"></i>
+                            <i class="fa fa-star fa-1"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <span ng-bind="build.commentCount"></span>
+                        <span>Comments</span>
+                        <i class="fa fa-comments fa-1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

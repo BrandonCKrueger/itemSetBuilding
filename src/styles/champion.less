@@ -1,0 +1,66 @@
+.container.champion {
+	
+	.item-set-info {
+		position: relative;
+		margin-bottom: 10px;
+		padding: 5px;
+		background-color: #FEFEFE;
+		box-shadow: 2px 2px 2px #888888;
+		opacity: 0.75;
+			
+		&:hover {
+			opacity: 1;
+			cursor: pointer;
+			
+			.overlay {
+				opacity: 1;
+			}
+		}
+		
+		.build-rating {
+			display: inline-block;
+			height: 100px;
+			width: 100px;
+		}
+		
+		.build-details {
+			position: absolute;
+			bottom: 5px;
+			left: 125px;
+			
+			.build-title {
+				@media (min-width: @screen-sm-min) {
+					font-size: 24px;
+				}
+				@media (min-width: @screen-md-min) {
+					font-size: 28px;
+				}
+				@media (min-width: @screen-lg-min) {
+					font-size: 32px;
+				}
+			}
+			
+			.build-author {
+				font-size: 14px;
+			}
+			
+			.build-date {
+				font-size: 12px;
+			}
+
+		}
+		
+		.build-social {
+			position: absolute;
+			bottom: 5px;
+			right: 10px;
+			text-align: right;
+			
+			div {
+				margin-top: 4px;
+			}
+		}
+		
+	}
+	
+}

@@ -1,0 +1,1 @@
+Angular application developed for the Riot API challenge

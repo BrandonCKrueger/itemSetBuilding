@@ -1,0 +1,35 @@
+<div class="champion-banner">
+    <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_4.jpg" style="margin-top: -50px; width: 100%;" />
+    <div>
+        <img class="champion-portrait" />
+        <section class="champion-details">
+            <div class="champion-details-name" ng-bind="championBannerVm.build.championName"></div>
+            <div class="champion-details-top-set"  ng-bind="championBannerVm.build.title"></div>
+            <div class="champion-details-top-set-info">
+                <span class="champion-details-top-set-info-rating">
+                    <i class="fa fa-star fa-1"></i>
+                    <i class="fa fa-star fa-1"></i>
+                    <i class="fa fa-star fa-1"></i>
+                    <i class="fa fa-star fa-1"></i>
+                    <i class="fa fa-star fa-1"></i>
+                </span>
+                <span>|</span>
+                <span class="champion-details-top-set-info-comments">
+                    <span ng-bind="championBannerVm.build.commentCount"></span>
+                    <span>Comments</span>
+                    <i class="fa fa-comments fa-1"></i>
+                </span>
+            </div>
+            <div class="champion-details-build-actions">
+                <button class="btn btn-xs btn-default create-item-set">
+                    <i class="fa fa-plus fa-1"></i>
+                    <span> | Create Item Set</span>
+                </button>
+                <button class="btn btn-xs btn-default copy-item-set">
+                    <i class="fa fa-files-o fa-1"></i>
+                    <span> | Copy Item Set</span>
+                </button>
+            </div>
+        </section>
+    </div>
+</div>
