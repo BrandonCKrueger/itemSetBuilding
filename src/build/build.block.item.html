@@ -1,0 +1,12 @@
+<div class="item">
+	<img ng-src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/{{buildItemVm.item.id}}.png2" />
+	<span class="item-info" ng-bind="buildItemVm.item.name"></span>
+	<div class="rec-math" ng-if="buildItemVm.recMath() && buildItemVm.index !== 0">
+		<i class="fa" ng-class="{'fa-arrow-right': buildItemVm.isLastItem(), 'fa-plus': !buildItemVm.isLastItem()}"></i>
+	</div>
+	<div class="btn btn-default quantity">
+		<i class="fa fa-minus"></i>
+		<span>100</span>
+		<i class="fa fa-plus"></i>
+	</div>
+</div>

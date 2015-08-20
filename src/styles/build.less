@@ -24,6 +24,17 @@
 		.item-build-details {
 			margin-left: 0;
 			
+			i {
+				transition: all 0.3s ease-in-out 0s;
+				
+				&:hover {
+					color: green;
+					transform: rotate(360deg);
+    				transition: all 0.5s ease-in-out 0s;
+					cursor: pointer;
+				}
+			}
+			
 			.images {
 				display: block;
 				
@@ -43,13 +54,19 @@
 			
 			header {
 				width: 100%;
-				height: 20px;
+				padding-bottom: 2px;
 				border-bottom: 1px solid #e6e8ea;
 				font-weight: bold;
 				
 				input {
-					width: 100%;
+					width: 80%;
 					height: 20px;
+				}
+				
+				.rec-math {
+					font-size: 10px;
+					padding-top: 2px;
+					padding-bottom: 2px;
 				}
 			}
 			
@@ -58,17 +75,17 @@
 				min-height: 80px;
 				
 				.item {
+					position: relative;
 					float: left;
 					padding: 10px;
+					padding-top: 15px;
 					width: 84px;
+					height: 117px;
 					background-color: #F5F5F5;
 					margin: 3px;
+					margin-bottom: 10px;
+					border: 1px solid rgba(0, 0, 0, 0.15);
 					.soft-rounded-corners;
-					
-					&:hover {
-						padding: 9px;
-						border: 1px solid rgba(0, 0, 0, 0.15);
-					}
 					
 					img {
 						height: 64px;
@@ -79,6 +96,75 @@
 						font-size: 10px;
 						display: block;
 						text-align: center;
+						max-height: 30px;
+					}
+					
+					.rec-math {
+						position: absolute;
+						left: -10px;
+						top: 30%;
+						color: green;
+					}
+					
+					.quantity {
+						width: 100%;
+						font-size: 10px;
+						padding-bottom: 0;
+						padding-left: 2px;
+						padding-right: 2px;
+						padding-top: 0;
+						
+						&:hover {
+							background-color: #fff;
+							border: 1px solid #ccc;
+							cursor: auto;
+						}
+						
+						.fa-minus {
+							float: left;
+							border-right: 1px solid #ccc;
+							padding-right: 5px;
+							padding-left: 3px;
+							height: 10px;
+							margin-top: 3px;
+							
+							&:hover {
+								cursor: pointer;
+								color: red;
+							}
+						}
+						
+						.fa-plus {
+							float: right;
+							border-left: 1px solid #ccc;
+							padding-left: 5px;
+							padding-right: 3px;
+							height: 10px;
+							margin-top: 3px;
+							
+							&:hover {
+								cursor: pointer;
+								color: green;
+							}
+						}
+					}
+				}
+				
+				.add-item {
+					float: left;
+					padding: 10px;
+					width: 84px;
+					height: 117px;
+					background-color: #F5F5F5;
+					margin: 3px;
+					text-align: center;
+					border: 1px solid rgba(0, 0, 0, 0.15);
+					opacity: 0.4;
+					.soft-rounded-corners;
+					
+					i {
+						margin-top: 50%;
+						font-size: 34px;
 					}
 				}
 			}

@@ -11,6 +11,9 @@
     "angular-ui-router": "0.2.14",
     "font-awesome": "4.3.0",
     "lodash": "3.9.3",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "angular-dragdrop": "~1.0.11",
+    "jquery": "~2.1.4",
+    "jquery-ui": "~1.11.4"
   }
 }

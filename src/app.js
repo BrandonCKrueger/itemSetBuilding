@@ -3,7 +3,8 @@
 
     var moduleDependencies = [
         'templates-main',
-        'ui.router'
+        'ui.router',
+        'ngDragDrop'
     ];
 
     angular

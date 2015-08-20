@@ -38,11 +38,13 @@ module.exports = {
         ],
         jsAppTestFiles: dirs.source + '**/*.spec.js',
         jsThirdPartyClientFiles: [
+            dirs.bower + 'jquery/dist/jquery.min.js',
+            dirs.bower + 'jquery-ui/jquery-ui.min.js',
             dirs.bower + 'angular/angular.js',
             dirs.bower + 'angular-ui-router/release/angular-ui-router.js',
-            dirs.bower + 'jquery/dist/jquery.js',
             dirs.bower + 'bootstrap/dist/js/bootstrap.js',
-            dirs.bower + 'lodash/lodash.js'
+            dirs.bower + 'lodash/lodash.js',
+            dirs.bower + 'angular-dragdrop/src/angular-dragdrop.min.js'
         ],
         jsThirdPartyTestFiles: [
             dirs.npm + 'angular-mocks/angular-mocks.js'

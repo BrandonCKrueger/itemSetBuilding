@@ -3,65 +3,58 @@
     <div class="row">
         <div class="col-md-6 item-build">
             <div class="row item-build-details">
+                <i class="fa fa-cog pull-right"></i>
                 <div class="col-xs-12 col-sm-6">
                     <label>Title: </label>
-                    <span>Build Title</span>
+                    <span ng-bind="buildVm.itemSet.title"></span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>Type: </label>
-                    <span>Build Type</span>
+                    <span ng-bind="buildVm.itemSet.type"></span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>Priority: </label>
-                    <span>Build Priority</span>
+                    <span ng-bind="buildVm.itemSet.priority"></span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>Sort Rank: </label>
-                    <span>Build Sort Rank</span>
+                    <span ng-bind="buildVm.itemSet.sortrank"></span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <label>Mode: </label>
+                    <label>Mode(s): </label>
                     <div class="images">
                         <img />
                         <img />
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <label>Map: </label>
+                    <label>Map(s): </label>
                     <div class="images">
                         <img />
                         <img />
                     </div>
                 </div>
             </div>
-            <div class="item-build-block">
+
+            <div class="item-build-block" ng-repeat="block in buildVm.itemSet.blocks">
                 <header>
-                    <input type="text" placeholder="Block Name" />
+                    <input type="text" placeholder="Block Name" ng-model="block.type" />
+                    <div class="btn btn-default rec-math pull-right"
+                         ng-class="{'btn-success': block.recMath}"
+                         ng-click="block.recMath = !block.recMath">
+                        Rec Math: On
+                    </div>
                 </header>
-                <section>
-                    <div class="item">
-                        <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png" />
-                        <span class="item-info">Sample Image</span>
-                    </div>
-                    <div class="item">
-                        <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png" />
-                        <span class="item-info">Sample Image</span>
-                    </div>
-                    <div class="item">
-                        <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png" />
-                        <span class="item-info">Sample Image</span>
-                    </div>
-                    <div class="item">
-                        <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png" />
-                        <span class="item-info">Sample Image</span>
-                    </div>
-                    <div class="item">
-                        <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png" />
-                        <span class="item-info">Sample Image</span>
-                    </div>
-                    <div class="item">
-                        <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png" />
-                        <span class="item-info">Sample Image</span>
+                <section data-drop="true"
+                         data-jqyoui-options
+                         jqyoui-droppable="{
+                            beforeDrop: 'buildVm.addItemToBlock(block)'
+                         }">
+                    <build-block-item ng-repeat="item in block.items track by $index" 
+                                      item-id="item.id"
+                                      index="$index"></build-block-item>
+                    <div class="add-item" ng-if="block.items.length < 6">
+                        <i class="fa fa-plus"></i>
                     </div>
                     <div style="clear: both;"></div>
                 </section>
@@ -71,13 +64,19 @@
                 <span> Add Block</span>
             </div>
         </div>
+
         <div class="col-md-6 item-list">
             <header class="row">
                 Item filter...
             </header>
             <div class="row">
-                <div class="item" ng-repeat="(itemId, itemData) in buildVm.items">
-                    <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png" />
+                <div class="item"
+                     ng-repeat="(itemId, itemData) in buildVm.items"
+                     data-drag="true"
+                     data-jqyoui-options="{revert: 'invalid'}"
+                     jqyoui-draggable="{animate:true, placeholder:true}"
+                     data-item-id="{{itemId}}">
+                    <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png2" />
                     <span class="item-info" ng-bind="itemData.name"></span>
                 </div>
             </div>
