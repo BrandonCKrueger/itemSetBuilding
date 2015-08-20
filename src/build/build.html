@@ -3,7 +3,6 @@
     <div class="row">
         <div class="col-md-6 item-build">
             <div class="row item-build-details">
-                <i class="fa fa-cog pull-right"></i>
                 <div class="col-xs-12 col-sm-6">
                     <label>Title: </label>
                     <span ng-bind="buildVm.itemSet.title"></span>
@@ -34,6 +33,7 @@
                         <img />
                     </div>
                 </div>
+                <i class="fa fa-cog" ng-click="modifyBuildDetails()"></i>
             </div>
 
             <div class="item-build-block" ng-repeat="block in buildVm.itemSet.blocks">
@@ -50,16 +50,56 @@
                          jqyoui-droppable="{
                             beforeDrop: 'buildVm.addItemToBlock(block)'
                          }">
-                    <build-block-item ng-repeat="item in block.items track by $index" 
-                                      item-id="item.id"
-                                      index="$index"></build-block-item>
-                    <div class="add-item" ng-if="block.items.length < 6">
-                        <i class="fa fa-plus"></i>
-                    </div>
+                    <ul ui-sortable ng-model="block.items">
+                        <li ng-repeat="item in block.items track by $index">
+                            <div class="item">
+                                <img ng-src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/{{buildVm.items[item.id].id}}.png" />
+                                <span class="item-info" ng-bind="buildVm.items[item.id].name"></span>
+                                <div class="rec-math" ng-if="block.recMath && !$first">
+                                    <i class="fa" ng-class="{'fa-arrow-right': $last, 'fa-plus': !$last}"></i>
+                                </div>
+                                <div class="btn btn-default quantity">
+                                    <i class="fa fa-minus" ng-click="buildVm.updateCount(item,-1)" ng-class="{'disabled': item.count <= 1}"></i>
+                                    <span ng-bind="item.count"></span>
+                                    <i class="fa fa-plus" ng-click="buildVm.updateCount(item,1)" ng-class="{'disabled': item.count >= 999}"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <div class="add-item" ng-if="block.items.length < 6">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                        </li>
+                    </ul>
+                    
                     <div style="clear: both;"></div>
                 </section>
+                <section class="restrictions">
+                    <header>
+                        <h5>
+                            <i class="fa fa-cog"></i>
+                            Restrictions
+                        </h5>
+                    </header>
+                    <div class="summonerLevel">
+                        <label>Summoner Level: </label>
+                        <span ng-bind="buildVm.summonerLevelRange(block)"></span>
+                    </div>
+                    <div class="summonerSpells" ng-if="block.showIfSummonerSpell.length > 0 || block.hideIfSummonerSpell.length > 0">
+                        <div>
+                            <label ng-if="block.showIfSummonerSpell.length > 0">Show if has Summoner Spells: </label>
+                            <label ng-if="block.hideIfSummonerSpell.length > 0">Hide if has Summoner Spells: </label>
+                            <div class="images">
+                                <img />
+                                <img />
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-            <div class="add-item-block">
+            <div class="add-item-block" ng-click="buildVm.addBlock()">
                 <i class="fa fa-plus"></i>
                 <span> Add Block</span>
             </div>

@@ -7,7 +7,12 @@
 
     function BuildController($q, staticDataService) {
         var vm = this;
+        vm.currentBlock = null;
+        vm.summonerLevelRange = summonerLevelRange;
         vm.addItemToBlock = addItemToBlock;
+        vm.updateCount = updateCount;
+        vm.addBlock = addBlock;
+        vm.modifyBuildDetails = modifyBuildDetails;
         vm.itemSet = {
             "title": "The name of the page",
             "type": "custom",
@@ -48,6 +53,20 @@
             vm.items = items;
         });
         
+        function summonerLevelRange(block) {
+            var output = '';
+            if (block.minSummonerLevel === -1 && block.maxSummonerLevel === -1) {
+                output = '1 - 30';
+            } else if (block.minSummonerLevel === -1) {
+                output = '1 - ' + block.maxSummonerLevel;
+            } else if (block.maxSummonerLevel === -1) {
+                output = block.minSummonerLevel + ' - 30';
+            } else {
+                output = block.minSummonerLevel + ' - ' + block.maxSummonerLevel;
+            }
+            return output;
+        }
+        
         function addItemToBlock(event, dragDrop, block) {
             var deferred = $q.defer();
 
@@ -70,6 +89,33 @@
             
             return deferred.promise;
         }
+        
+        function updateCount(item, increment) {
+            if (item && item.count + increment >= 1 && item.count + increment <= 999 ) {
+                item.count += increment;
+            }
+        }
+        
+        function addBlock() {
+            if (vm.itemSet && !vm.itemSet.blocks) {
+                vm.itemSet.blocks = [];
+            }
+
+            vm.itemSet.blocks.push({
+                "type": "",
+                "recMath": false,
+                "minSummonerLevel": -1,
+                "maxSummonerLevel": -1,
+                "showIfSummonerSpell": "",
+                "hideIfSummonerSpell": "",
+                "items": []
+            });
+        }
+        
+        function modifyBuildDetails() {
+            
+        }
+
     }
 
 }(window.angular));

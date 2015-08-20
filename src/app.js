@@ -4,7 +4,8 @@
     var moduleDependencies = [
         'templates-main',
         'ui.router',
-        'ngDragDrop'
+        'ngDragDrop',
+        'ui.sortable'
     ];
 
     angular
