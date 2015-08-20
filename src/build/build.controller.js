@@ -112,8 +112,8 @@
             });
         }
         
-        function modifyBuildDetails() {
-            
+        function modifyBuildDetails(item) {
+            console.log(item);
         }
 
     }

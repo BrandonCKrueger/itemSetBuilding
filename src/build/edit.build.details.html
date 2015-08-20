@@ -1,0 +1,67 @@
+<div class="full-screen-overlay"></div>
+<div class="row edit-build-details">
+	<div class="col-xs-12">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#build-details-general" aria-controls="build-details-general" role="tab" data-toggle="tab">General Info</a>
+			</li>
+			<li role="presentation">
+				<a href="#build-details-game-modes" aria-controls="build-details-game-modes" role="tab" data-toggle="tab">Game Modes</a>
+			</li>
+			<li role="presentation">
+				<a href="#build-details-maps" aria-controls="build-details-maps" role="tab" data-toggle="tab">Maps</a>
+			</li>
+		</ul>
+		
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="build-details-general">
+				<form>
+					<div class="form-group">
+						<label for="build-title">Title</label>
+						<input type="text" id="build-title" ng-model="buildDetailsVm.itemSet.title" placeholder="Title" />
+						<p class="help-block">The name of the item set as you would see it in the drop down.</p>
+					</div>
+					
+					<div class="form-group">
+						<label for="build-type">Type</label>
+						<input type="text" id="build-type" ng-model="buildDetailsVm.itemSet.type" placeholder="Type" />
+						<p class="help-block">This field is only used for grouping and sorting item sets. Custom item sets are ordered above global item sets. This field does not govern whether an item set available for every champion.</p>
+					</div>
+					
+					<div class="form-group">
+						<label for="build-priority">Priority</label>
+						<input type="text" id="build-priority" ng-model="buildDetailsVm.itemSet.priority" placeholder="Priority" />
+						<p class="help-block">Selectively sort this item set above other item sets. Overrides <strong>sortrank</strong>, but not <strong>type</strong>.</p>
+					</div>
+					
+					<div class="form-group">
+						<label for="build-sort-rank">Sort Rank</label>
+						<input type="text" id="build-sort-rank" ng-model="buildDetailsVm.itemSet.sortrank" placeholder="Sort Rank" />
+						<p class="help-block">The order in which this item set will be sorted within a specific <strong>type</strong>. Item sets are sorted in descending order.</p>
+					</div>
+				</form>
+			</div>
+			
+			<div role="tabpanel" class="tab-pane" id="build-details-game-modes">
+				This is the game modes tab!
+			</div>
+			
+			<div role="tabpanel" class="tab-pane" id="build-details-maps">
+				This is the maps tab!
+			</div>
+		</div>
+	</div>
+	
+	<footer>
+		<button class="btn btn-default" ng-click="buildDetailsVm.closeModal()">
+			<i class="fa fa-times"></i>
+			<span>Cancel</span>
+		</button>
+		<button class="btn btn-default" ng-click="buildDetailsVm.saveChanges()">
+			<i class="fa fa-floppy-o"></i>
+			<span>Save</span>
+		</button>
+	</footer>
+</div>

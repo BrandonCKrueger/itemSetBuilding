@@ -33,7 +33,7 @@
                         <img />
                     </div>
                 </div>
-                <i class="fa fa-cog" ng-click="modifyBuildDetails()"></i>
+                <i class="fa fa-cog" ng-click="buildVm.editDetails = true;"></i>
             </div>
 
             <div class="item-build-block" ng-repeat="block in buildVm.itemSet.blocks">
@@ -123,3 +123,7 @@
         </div>
     </div>
 </section>
+
+<edit-build-details ng-if="buildVm.editDetails"
+                    item-set="buildVm.itemSet"
+                    modal-state="buildVm.editDetails"></edit-build-details>
