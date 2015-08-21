@@ -1,14 +1,14 @@
 {
-  "name": "zappos-angular",
+  "name": "item-set-builder",
   "version": "1.0.0",
-  "description": "An angular application to tackle the Zappos challenge",
+  "description": "An angular application to tackle the Riot API challenge #2",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:brandonckrueger/zappos-angular.git"
+    "url": ""
   },
   "author": "Brandon Krueger <Brandon.C.Krueger@gmail.com>",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/brandonckrueger/zappos-angular",
+  "homepage": "",
   "devDependencies": {
     "angular-mocks": "1.3.15",
     "bower": "1.4.1",

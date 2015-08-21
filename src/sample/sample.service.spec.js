@@ -1,20 +1,20 @@
-(function () {
-    'use strict';
+// (function () {
+//     'use strict';
 
-    describe('sampleService', function () {
+//     describe('sampleService', function () {
 
-        var sampleService;
+//         var sampleService;
 
-        beforeEach(module('itemSetApp'));
-        beforeEach(inject(function (_sampleService_) {
-            sampleService = _sampleService_;
-        }));
+//         beforeEach(module('itemSetApp'));
+//         beforeEach(inject(function (_sampleService_) {
+//             sampleService = _sampleService_;
+//         }));
 
-        describe('someFunction', function () {
+//         describe('someFunction', function () {
 
-            it('will return true', function () {
-                expect(sampleService.someFunction()).toBe(true);
-            });
-        });
-    });
-}());
+//             it('will return true', function () {
+//                 expect(sampleService.someFunction()).toBe(true);
+//             });
+//         });
+//     });
+// }());

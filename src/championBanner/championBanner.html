@@ -1,7 +1,7 @@
 <div class="champion-banner">
-    <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_4.jpg" style="margin-top: -50px; width: 100%;" />
+    <img ng-src="./images/{{championBannerVm.champion.name}}_Splash_0.jpg" style="margin-top: -50px; width: 100%;" />
     <div>
-        <img class="champion-portrait" />
+        <img class="champion-portrait" ng-src="./images/{{championBannerVm.champion.name}}_0.jpg" />
         <section class="champion-details">
             <div class="champion-details-name" ng-bind="championBannerVm.build.championName"></div>
             <div class="champion-details-top-set"  ng-bind="championBannerVm.build.title"></div>

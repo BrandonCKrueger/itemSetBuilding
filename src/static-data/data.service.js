@@ -130,6 +130,8 @@
             
         var factory = {
             getChampions: getChampions,
+            getChampionById: getChampionById,
+            getChampionByName: getChampionByName,
             getItems: getItems,
             getItemById: getItemById
         };
@@ -149,6 +151,44 @@
                     deferred.resolve(_champions);
                 }).catch(function(error) {
                     deferred.reject(error);
+                });
+            }
+
+            return deferred.promise;
+        }
+        
+        function getChampionByName(championName) {
+            var deferred = $q.defer();
+
+            if(!championName || typeof championName !== 'string') {
+                deferred.reject('ChampionName needs to be a string');
+            } else {
+                getChampions().then(function(champions) {
+                    for (var championId in champions) {
+                        if (champions[championId] === championName) {
+                            deferred.resolve({
+                                id: championId,
+                                name: champions[championId]
+                            });
+                        }
+                    }
+                });
+            }
+
+            return deferred.promise;
+        }
+
+        function getChampionById(championId) {
+            var deferred = $q.defer();
+
+            if(!championId || typeof championId !== 'number') {
+                deferred.reject('ChampionId needs to be a number');
+            } else {
+                getChampions().then(function(champions) {
+                    deferred.resolve({
+                        id: championId,
+                        name: champions[championId]
+                    });
                 });
             }
 
@@ -182,13 +222,12 @@
                 deferred.reject('ItemID needs to be a number');
             }
 
-            if (_items) {
-                deferred.resolve(_items[itemId]);
-            } else {
-                getItems().then(function(items) {
-                    deferred.resolve(items[itemId]);
+            getItems().then(function(items) {
+                deferred.resolve({
+                    id: itemId,
+                    name: items[itemId]
                 });
-            }
+            });
 
             return deferred.promise;
         }

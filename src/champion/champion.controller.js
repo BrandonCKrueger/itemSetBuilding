@@ -5,9 +5,8 @@
         .module('itemSetApp')
         .controller('ChampionController', ChampionController);
 
-    function ChampionController($stateParams) {
+    function ChampionController($stateParams, staticDataService) {
         var vm = this;
-
         vm.builds = [
             {
                 id: 1,
@@ -41,7 +40,13 @@
                 author: 'Second Author',
                 date: '08/06/15'
             }
-        ]
+        ];
+
+        staticDataService.getChampionByName($stateParams.championName).then(function(champion) {
+            vm.champion = champion;
+        }).catch(function(response) {
+            console.log({'Error': response});
+        });
 
         console.log('Looking for Champions: ' + $stateParams.championName);
     }

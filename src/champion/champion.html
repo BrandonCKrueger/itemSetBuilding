@@ -5,7 +5,9 @@
              ng-repeat="build in championVm.builds"
              ui-sref="build({buildId: build.id})">
             <div>
-                <img class="build-rating" />
+                <img class="champion-image"
+                     ng-src="http://lkimg.zamimg.com/images/v2/champions/icons/size100x100/{{championVm.champion.id}}.png"
+                     alt="{{championName}}" />
                 <div class="build-details">
                     <div class="build-title" ng-bind="build.title | limitTo : 50"></div>
                     <div class="build-author" ng-bind="build.author"></div>

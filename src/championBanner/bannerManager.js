@@ -6,7 +6,10 @@
         .factory('bannerManager', bannerManager);
 
     function bannerManager($q) {
-		var _currentChampion = 'Annie';
+		var _currentChampion = {
+            id: 1,
+            name: 'Annie'
+        };
         var _topBuilds = [
             {
                 championName: 'Annie',

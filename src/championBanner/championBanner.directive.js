@@ -15,6 +15,7 @@
     
     function ChampionBanner(bannerManager) {
         var vm = this;
+        vm.champion = bannerManager.getCurrentChampion();
         
         bannerManager.getCurrentChampionBannerBuild().then(function(build) {
             vm.build = build;
