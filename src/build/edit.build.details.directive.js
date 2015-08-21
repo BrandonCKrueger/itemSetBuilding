@@ -21,9 +21,9 @@
     function EditBuildDetails($scope) {
         var vm = this;
         vm.itemSet = angular.copy($scope.itemSet);
-        vm.modalState = $scope.modalState;
         vm.saveChanges = saveChanges;
         vm.closeModal = closeModal;
+        vm.getDisplayState = getDisplayState;
         
         function saveChanges() {
             for (var key in vm.itemSet) {
@@ -37,6 +37,10 @@
                 $scope.callback()(vm.itemSet);
             }
             $scope.modalState = false;
+        }
+        
+        function getDisplayState() {
+            return $scope.modalState;
         }
     }
 

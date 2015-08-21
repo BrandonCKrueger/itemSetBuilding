@@ -5,7 +5,8 @@
         'templates-main',
         'ui.router',
         'ngDragDrop',
-        'ui.sortable'
+        'ui.sortable',
+        'ngAnimate'
     ];
 
     angular

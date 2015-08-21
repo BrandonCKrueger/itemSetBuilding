@@ -124,6 +124,8 @@
     </div>
 </section>
 
-<edit-build-details ng-if="buildVm.editDetails"
+<edit-build-details class="edit-build-details"
                     item-set="buildVm.itemSet"
-                    modal-state="buildVm.editDetails"></edit-build-details>
+                    modal-state="buildVm.editDetails"
+                    ng-if="buildVm.editDetails"
+                    ng-animate="'animate'"></edit-build-details>

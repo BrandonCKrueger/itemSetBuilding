@@ -45,7 +45,8 @@ module.exports = {
             dirs.bower + 'bootstrap/dist/js/bootstrap.js',
             dirs.bower + 'lodash/lodash.js',
             dirs.bower + 'angular-dragdrop/src/angular-dragdrop.min.js',
-            dirs.bower + 'angular-ui-sortable/sortable.min.js'
+            dirs.bower + 'angular-ui-sortable/sortable.min.js',
+            dirs.bower + 'angular-animate/angular-animate.min.js'
         ],
         jsThirdPartyTestFiles: [
             dirs.npm + 'angular-mocks/angular-mocks.js'

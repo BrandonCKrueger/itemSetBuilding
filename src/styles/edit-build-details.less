@@ -1,92 +1,119 @@
 .edit-build-details {
-	position: absolute;
-	left: 0;
-	top: 30%;
-	background-color: #fefefe;
-	box-shadow: 2px 2px 2px #888;
-	min-width: 60%;
-	max-width: 90%;
-	padding: 10px;
-	.soft-rounded-corners;
-	
-	&.ng-enter, &.ng-leave {
-		-webkit-transition:5s linear all;
-  		transition:5s linear all;
-	}
-	&.ng-enter {
-		width: 100%;
-	}
+
+	&.ng-enter,
 	&.ng-leave {
-		width: 0;
-	}
-	
-	ul {
-		li {
-			
-			&.general-info-header {
-				border-top-right-radius: 5px;
-			}
-		}
-	}
-	
-	.tab-content {
-		padding-top: 10px;
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-	
-	.form-group {
-		input {
-			display: block;
-		}
-	}
-	
-	footer {
-		clear:both;
-		border-top: 1px solid #e6e8ea;
-		margin-left: 20px;
-		padding-top: 10px;
+		.ease-in-out-transition(0.5s);
 		
-		button {
-			margin-left: 25px;
-			padding-top: 3px;
-			padding-bottom: 3px;
-			padding-left: 15px;
-			padding-right: 15px;
-			
-			span {
-				border-left: 1px solid #e6e8ea;
-				padding-left: 5px;
-				margin-left: 3px;
+		.row {
+			.ease-in-out-transition(0.5s);
+		}
+	}
+	&.ng-enter,
+	&.ng-leave.ng-leave-active {
+		.row {
+			left: -100%;
+		}
+		
+		.full-screen-overlay {
+			opacity: 0;
+		}
+	}
+	&.ng-leave,
+	&.ng-enter.ng-enter-active {
+		.row {
+			left: 0;
+		}
+		
+		.full-screen-overlay {
+			opacity: 0.75;
+		}
+	}
+	
+	.row {
+		position: absolute;
+		left: 0;
+		top: 10%;
+		background-color: #fefefe;
+		box-shadow: 2px 2px 2px #888;
+		padding: 10px;
+		.soft-rounded-corners;
+		
+		@media(max-width:767px) {
+			width: 90%;
+		}
+		@media(min-width:768px) {
+			width: 80%;
+		}
+		@media(min-width:992px) {
+			width: 50%;
+		}
+		@media(min-width:1200px) {
+			width: 40%;
+		}
+	
+		ul {
+			li {
+				
+				&.general-info-header {
+					border-top-right-radius: 5px;
+				}
+			}
+		}
+		
+		.tab-content {
+			padding-top: 10px;
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		
+		.form-group {
+			input {
+				display: block;
 			}
 			
-			.fa-floppy-o {
-				color: @brand-success;
+			.help-block {
+				font-size: smaller;
 			}
+		}
+		
+		footer {
+			clear:both;
+			border-top: 1px solid #e6e8ea;
+			margin-left: 20px;
+			padding-top: 10px;
 			
-			.fa-times {
+			button {
+				margin-left: 25px;
+				padding-top: 3px;
+				padding-bottom: 3px;
+				padding-left: 15px;
+				padding-right: 15px;
+				
+				span {
+					border-left: 1px solid #e6e8ea;
+					padding-left: 5px;
+					margin-left: 3px;
+				}
+				
+				.fa-floppy-o {
+					color: @brand-success;
+				}
+				
+				.fa-times {
+					color: @brand-danger;
+				}
+			}
+		}
+		
+		.close-modal {
+			position: absolute;
+			top: 2px;
+			right: 2px;
+			
+			&:hover {
 				color: @brand-danger;
+				cursor: pointer;
 			}
 		}
 	}
-}
-
-@keyframes enter_animation {
-  from { left:100%; }
-  to { left:0; }
-}
-
-@-webkit-keyframes enter_animation {
-  from { left:100%; }
-  to { left:0; }
-}
-
-@keyframes leave_animation {
-  from { left:0; }
-  to { left:-100%; }
-}
-
-@-webkit-keyframes leave_animation {
-  from { left:0; }
-  to { left:-100%; }
 }
