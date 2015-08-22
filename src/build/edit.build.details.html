@@ -3,20 +3,20 @@
 	<div class="col-xs-12">
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active">
-				<a href="#build-details-general" aria-controls="build-details-general" role="tab" data-toggle="tab">General Info</a>
+			<li role="presentation" class="active" ng-init="buildDetailsVm.tab = 'generalInfo'">
+				<a href="" aria-controls="build-details-general" role="tab" data-toggle="tab" ng-click="buildDetailsVm.tab = 'generalInfo'">General Info</a>
 			</li>
 			<li role="presentation">
-				<a href="#build-details-game-modes" aria-controls="build-details-game-modes" role="tab" data-toggle="tab">Game Modes</a>
+				<a href="" aria-controls="build-details-game-modes" role="tab" data-toggle="tab" ng-click="buildDetailsVm.tab = 'gameModes'">Game Modes</a>
 			</li>
 			<li role="presentation">
-				<a href="#build-details-maps" aria-controls="build-details-maps" role="tab" data-toggle="tab">Maps</a>
+				<a href="" aria-controls="build-details-maps" role="tab" data-toggle="tab" ng-click="buildDetailsVm.tab = 'maps'">Maps</a>
 			</li>
 		</ul>
 		
 		<!-- Tab panes -->
 		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane active" id="build-details-general">
+			<div role="tabpanel" class="tab-pane tab-pane-details" ng-class="{'active': buildDetailsVm.tab == 'generalInfo'}" id="build-details-general">
 				<form>
 					<div class="form-group">
 						<label for="build-title">Title</label>
@@ -26,30 +26,64 @@
 					
 					<div class="form-group">
 						<label for="build-type">Type</label>
-						<input type="text" id="build-type" ng-model="buildDetailsVm.itemSet.type" placeholder="Type" />
+						<div>
+							<button class="btn btn-xs btn-default" ng-click="buildDetailsVm.setType('custom')" ng-class="{'btn-success': buildDetailsVm.isTypeSelected('custom')}">Custom</button>
+							<button class="btn btn-xs btn-default" ng-click="buildDetailsVm.setType('global')" ng-class="{'btn-success': buildDetailsVm.isTypeSelected('global')}">Global</button>
+						</div>
 						<p class="help-block">This field is only used for grouping and sorting item sets. Custom item sets are ordered above global item sets. This field does not govern whether an item set available for every champion.</p>
 					</div>
 					
 					<div class="form-group">
-						<label for="build-priority">Priority</label>
-						<input type="text" id="build-priority" ng-model="buildDetailsVm.itemSet.priority" placeholder="Priority" />
+						<label for="build-priority">Priority? </label>
+						<div>
+							<button class="btn btn-xs btn-default" ng-click="buildDetailsVm.setPriority(false)" ng-class="{'btn-success': !buildDetailsVm.itemSet.priority}">No</button>
+							<button class="btn btn-xs btn-default" ng-click="buildDetailsVm.setPriority(true)" ng-class="{'btn-success': buildDetailsVm.itemSet.priority}">Yes</button>
+						</div>
 						<p class="help-block">Selectively sort this item set above other item sets. Overrides <strong>sortrank</strong>, but not <strong>type</strong>.</p>
 					</div>
 					
 					<div class="form-group">
 						<label for="build-sort-rank">Sort Rank</label>
-						<input type="text" id="build-sort-rank" ng-model="buildDetailsVm.itemSet.sortrank" placeholder="Sort Rank" />
+						<input type="number" min="0" id="build-sort-rank" ng-model="buildDetailsVm.itemSet.sortrank" placeholder="Sort Rank" />
 						<p class="help-block">The order in which this item set will be sorted within a specific <strong>type</strong>. Item sets are sorted in descending order.</p>
 					</div>
 				</form>
 			</div>
 			
-			<div role="tabpanel" class="tab-pane" id="build-details-game-modes">
-				This is the game modes tab!
+			<div role="tabpanel" class="tab-pane tab-pane-game-modes" id="build-details-game-modes" ng-class="{'active': buildDetailsVm.tab == 'gameModes'}">
+				<div class="row">
+					<div class="col-xs-12">
+						<button class="btn btn-default pull-right" ng-click="buildDetailsVm.selectMode('any')">All Modes</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 mode"
+						 ng-repeat="mode in buildDetailsVm.modes track by $index"
+						 ng-class="{'selected': buildDetailsVm.isModeSelected(mode)}"
+						 ng-click="buildDetailsVm.selectMode(mode.code)">
+						<img ng-src="./images/{{mode.image}}">
+						<p ng-bind="mode.name"></p>
+						<i class="fa fa-check-circle"></i>
+					</div>
+				</div>
 			</div>
 			
-			<div role="tabpanel" class="tab-pane" id="build-details-maps">
-				This is the maps tab!
+			<div role="tabpanel" class="tab-pane tab-pane-maps" id="build-details-maps" ng-class="{'active': buildDetailsVm.tab == 'maps'}">
+				<div class="row">
+					<div class="col-xs-12">
+						<button class="btn btn-default pull-right" ng-click="buildDetailsVm.selectMap('any')">All Maps</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 map"
+						 ng-repeat="map in buildDetailsVm.maps track by $index"
+						 ng-class="{'selected': buildDetailsVm.isMapSelected(map)}"
+						 ng-click="buildDetailsVm.selectMap(map.code)">
+						<img ng-src="./images/{{map.image}}">
+						<p ng-bind="map.name"></p>
+						<i class="fa fa-check-circle"></i>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

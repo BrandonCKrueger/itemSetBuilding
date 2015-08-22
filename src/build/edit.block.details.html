@@ -1,0 +1,48 @@
+<div class="full-screen-overlay"></div>
+<div class="row" style="top: {{blockDetailsVm.block.distanceFromTop}}px;">
+	<div class="col-xs-12">
+		<form name="blockDetailsForm">
+			<div class="form-group">
+				<label for="block-min-level">Minimum Summoner Level</label>
+				<input type="number" min="-1" max="{{blockDetailsVm.block.maxSummonerLevel}}" id="block-min-level" ng-model="blockDetailsVm.block.minSummonerLevel" placeholder="0" />
+				<p class="help-block">The minimum required account level for the block to be visible to the player.</p>
+			</div>
+			<div class="form-group">
+				<label for="block-max-level">Max Summoner Level</label>
+				<input type="number" min="{{blockDetailsVm.block.minSummonerLevel}}" max="30" id="block-max-level" ng-model="blockDetailsVm.block.maxSummonerLevel" placeholder="0" />
+				<p class="help-block">The maximum allowed account level for the block to be visible to the player.</p>
+			</div>
+			<div class="form-group">
+				<label for="block-max-level">Summoner Spells</label>
+				<div>
+					<button class="btn btn-xs btn-default" ng-click="blockDetailsVm.setSpellRestriction('hide')" ng-class="{'btn-success': blockDetailsVm.isRestrictionType('hide')}">Hide if summoner has</button>
+					<button class="btn btn-xs btn-default" ng-click="blockDetailsVm.setSpellRestriction('show')" ng-class="{'btn-success': blockDetailsVm.isRestrictionType('show')}">Show if summoner has</button>
+				</div>
+				<p class="help-block" ng-if="blockDetailsVm.isRestrictionType('show')">Only show the block if the player has equipped a specific summoner spell.</p>
+				<p class="help-block" ng-if="blockDetailsVm.isRestrictionType('hide')">Hide the block if the player has equipped a specific summoner spell.</p>
+				<div ng-if="blockDetailsVm.isRestrictionType('show') || blockDetailsVm.isRestrictionType('hide')"
+					 class="summonerSpell"
+					 ng-repeat="summonerSpell in blockDetailsVm.summonerSpells"
+					 ng-style="{'background':'url(http://ddragon.leagueoflegends.com/cdn/5.15.1/img/sprite/spell0.png) {{summonerSpell.image.left}}px {{summonerSpell.image.top}}px no-repeat'}"
+					 ng-click="blockDetailsVm.selectSpell(summonerSpell.name)"
+					 ng-class="{'selected': blockDetailsVm.isSpellSelected(summonerSpell.name)}">
+					<i class="fa fa-circle"></i>
+					<i class="fa fa-check-circle"></i>
+				</div>
+			</div>
+		</form>
+	</div>
+		
+	<footer>
+		<button class="btn btn-default" ng-click="blockDetailsVm.closeModal()">
+			<i class="fa fa-times"></i>
+			<span>Cancel</span>
+		</button>
+		<button class="btn btn-default" ng-click="blockDetailsVm.saveChanges()">
+			<i class="fa fa-floppy-o"></i>
+			<span>Save</span>
+		</button>
+	</footer>
+	
+	<i class="fa fa-times close-modal" ng-click="blockDetailsVm.closeModal()"></i>
+</div>

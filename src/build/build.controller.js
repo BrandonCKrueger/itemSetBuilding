@@ -7,12 +7,11 @@
 
     function BuildController($q, staticDataService) {
         var vm = this;
-        vm.currentBlock = null;
         vm.summonerLevelRange = summonerLevelRange;
         vm.addItemToBlock = addItemToBlock;
         vm.updateCount = updateCount;
         vm.addBlock = addBlock;
-        vm.modifyBuildDetails = modifyBuildDetails;
+        vm.editBlock = editBlock;
         vm.itemSet = {
             "title": "The name of the page",
             "type": "custom",
@@ -111,11 +110,12 @@
                 "items": []
             });
         }
-        
-        function modifyBuildDetails(item) {
-            console.log(item);
-        }
 
+        function editBlock(block, $event) {
+            vm.blockToEdit = block;
+            vm.editBlockDetails = true;
+            vm.blockToEdit.distanceFromTop = angular.element($event.toElement.parentNode.parentNode.parentNode.parentNode).offset().top - 100;
+        }
     }
 
 }(window.angular));

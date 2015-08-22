@@ -9,29 +9,31 @@
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>Type: </label>
-                    <span ng-bind="buildVm.itemSet.type"></span>
+                    <span ng-bind="buildVm.itemSet.type" style="text-transform: capitalize;"></span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>Priority: </label>
-                    <span ng-bind="buildVm.itemSet.priority"></span>
+                    <span ng-if="!buildVm.itemSet.priority">No</span>
+                    <span ng-if="buildVm.itemSet.priority">Yes</span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <label>Sort Rank: </label>
                     <span ng-bind="buildVm.itemSet.sortrank"></span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <label>Mode(s): </label>
-                    <div class="images">
-                        <img />
-                        <img />
-                    </div>
+                    <label>Mode: </label>
+                    <span ng-if="buildVm.itemSet.mode === 'any'">All Modes</span>
+                    <span ng-if="buildVm.itemSet.mode === 'CLASSIC'">Classic</span>
+                    <span ng-if="buildVm.itemSet.mode === 'ARAM'">ARAM</span>
+                    <span ng-if="buildVm.itemSet.mode === 'ODIN'">Dominion</span>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <label>Map(s): </label>
-                    <div class="images">
-                        <img />
-                        <img />
-                    </div>
+                    <label>Map: </label>
+                    <span ng-if="buildVm.itemSet.map === 'any'">All Maps</span>
+                    <span ng-if="buildVm.itemSet.map === 'SR'">Summoners Rift</span>
+                    <span ng-if="buildVm.itemSet.map === 'TT'">Twisted Treeline</span>
+                    <span ng-if="buildVm.itemSet.map === 'CS'">Crystal Score</span>
+                    <span ng-if="buildVm.itemSet.map === 'HA'">Howling Abyss</span>
                 </div>
                 <i class="fa fa-cog" ng-click="buildVm.editDetails = true;"></i>
             </div>
@@ -79,7 +81,7 @@
                 <section class="restrictions">
                     <header>
                         <h5>
-                            <i class="fa fa-cog"></i>
+                            <i class="fa fa-cog" ng-click="buildVm.editBlock(block, $event);"></i>
                             Restrictions
                         </h5>
                     </header>
@@ -88,13 +90,13 @@
                         <span ng-bind="buildVm.summonerLevelRange(block)"></span>
                     </div>
                     <div class="summonerSpells" ng-if="block.showIfSummonerSpell.length > 0 || block.hideIfSummonerSpell.length > 0">
-                        <div>
-                            <label ng-if="block.showIfSummonerSpell.length > 0">Show if has Summoner Spells: </label>
-                            <label ng-if="block.hideIfSummonerSpell.length > 0">Hide if has Summoner Spells: </label>
-                            <div class="images">
-                                <img />
-                                <img />
-                            </div>
+                        <div ng-if="block.showIfSummonerSpell.length > 0">
+                            <label>Show if Summoner has spell: </label>
+                            <span ng-bind="block.showIfSummonerSpell"></span>
+                        </div>
+                        <div ng-if="block.hideIfSummonerSpell.length > 0">
+                            <label>Hide if Summoner has spell: </label>
+                            <span ng-bind="block.hideIfSummonerSpell"></span>
                         </div>
                     </div>
                 </section>
@@ -129,3 +131,9 @@
                     modal-state="buildVm.editDetails"
                     ng-if="buildVm.editDetails"
                     ng-animate="'animate'"></edit-build-details>
+
+<edit-block-details class="edit-block-details"
+                    block="buildVm.blockToEdit"
+                    modal-state="buildVm.editBlockDetails"
+                    ng-if="buildVm.editBlockDetails"
+                    ng-animate="'animate'"></edit-block-details>
