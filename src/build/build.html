@@ -1,32 +1,32 @@
 <section class="container build">
     <div class="row">
-        <div class="col-xs-12 item-build">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 item-build">
             <div class="row item-build-details">
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-6">
                     <label>Title: </label>
                     <span ng-bind="buildVm.itemSet.title"></span>
                 </div>
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-6">
                     <label>Type: </label>
                     <span ng-bind="buildVm.itemSet.type" style="text-transform: capitalize;"></span>
                 </div>
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-6">
                     <label>Priority: </label>
                     <span ng-if="!buildVm.itemSet.priority">No</span>
                     <span ng-if="buildVm.itemSet.priority">Yes</span>
                 </div>
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-6">
                     <label>Sort Rank: </label>
                     <span ng-bind="buildVm.itemSet.sortrank"></span>
                 </div>
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-6">
                     <label>Mode: </label>
                     <span ng-if="buildVm.itemSet.mode === 'any'">All Modes</span>
                     <span ng-if="buildVm.itemSet.mode === 'CLASSIC'">Classic</span>
                     <span ng-if="buildVm.itemSet.mode === 'ARAM'">ARAM</span>
                     <span ng-if="buildVm.itemSet.mode === 'ODIN'">Dominion</span>
                 </div>
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-6">
                     <label>Map: </label>
                     <span ng-if="buildVm.itemSet.map === 'any'">All Maps</span>
                     <span ng-if="buildVm.itemSet.map === 'SR'">Summoners Rift</span>
@@ -39,7 +39,7 @@
                    ng-if="buildVm.itemSet.editable"></i>
             </div>
 
-            <div class="item-build-block" ng-repeat="block in buildVm.itemSet.blocks">
+            <div class="item-build-block" ng-repeat="block in buildVm.itemSet.blocks" id="block-{{block.$$hashKey}}">
                 <header>
                     <input type="text" placeholder="Block Name" ng-model="block.type" ng-if="buildVm.itemSet.editable" />
                     <strong ng-bind="block.type" ng-if="!buildVm.itemSet.editable"></strong>
@@ -50,11 +50,7 @@
                         Rec Math: On
                     </div>
                 </header>
-                <section data-drop="true"
-                         data-jqyoui-options
-                         jqyoui-droppable="{
-                            beforeDrop: 'buildVm.addItemToBlock(block)'
-                         }">
+                <section>
                     <ul ui-sortable ng-model="block.items">
                         <li ng-repeat="item in block.items track by $index">
                             <div class="item">
@@ -120,8 +116,32 @@
                 <span> Add Block</span>
             </div>
         </div>
-        
-        <div class="col-md-6 col-xs-12" ng-if="!buildVm.itemSet.editable">
+
+        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-6" ng-if="buildVm.itemSet.editable">
+            <header class="row author-notes">
+                <div class="col-xs-12">
+                    <label>Author's Notes</label>
+                    <button class="btn btn-xs btn-default pull-right"
+                            ng-click="buildVm.itemSet.who.public = !buildVm.itemSet.who.public"
+                            ng-class="{ 'btn-default': !buildVm.itemSet.who.public,
+                                        'btn-success': buildVm.itemSet.who.public }">
+                        <i class="fa fa-globe"></i>
+                        <span ng-show="!buildVm.itemSet.who.public">| Private</span>
+                        <span ng-show="buildVm.itemSet.who.public">| Public</span>
+                    </button>
+                </div>
+                <div class="col-xs-12">
+                    <textarea></textarea>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-default">
+                        Save Build
+                    </button>
+                </div>
+            </header>
+        </div>
+
+        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-6" ng-if="!buildVm.itemSet.editable">
             <header class="row">
                 Related Builds
             </header>
@@ -143,6 +163,7 @@
                     
 <item-list class="item-list"
            block-to-add-item-to="buildVm.blockToAddItemTo"
+           callback="buildVm.scrollToBlock"
            modal-state="buildVm.showItemList"
            ng-if="buildVm.showItemList"
            ng-animate="'animate'"></item-list>

@@ -5,10 +5,9 @@
         .module('itemSetApp')
         .controller('BuildController', BuildController);
 
-    function BuildController($q, $stateParams, staticDataService) {
+    function BuildController($q, $stateParams, staticDataService, $location, $anchorScroll) {
         var vm = this;
         vm.summonerLevelRange = summonerLevelRange;
-        //vm.addItemToBlock = addItemToBlock;
         vm.updateCount = updateCount;
         vm.addBlock = addBlock;
         vm.addItemToBlock = addItemToBlock;
@@ -23,7 +22,8 @@
                 createdBy: {
                     userId: 1,
                     user: 'Polixo'
-                }
+                },
+                public: true
             },
             "editable": true,
             "title": "The name of the page",
@@ -83,29 +83,6 @@
             return output;
         }
         
-        // function addItemToBlock(event, dragDrop, block) {
-        //     var deferred = $q.defer();
-
-        //     if (!block.items) {
-        //         block.items = [];
-        //     }
-
-        //     if (block.items.length < 6) {
-        //         if (dragDrop && dragDrop.draggable && dragDrop.draggable[0] &&
-        //             dragDrop.draggable[0].attributes && dragDrop.draggable[0].attributes['data-item-id'] &&
-        //             dragDrop.draggable[0].attributes['data-item-id'].nodeValue) {
-        //             var itemId = dragDrop.draggable[0].attributes['data-item-id'].nodeValue;
-        //             block.items.push({
-        //                 count: 1,
-        //                 id: itemId
-        //             });
-        //         }
-        //     }
-        //     deferred.reject();
-            
-        //     return deferred.promise;
-        // }
-        
         function updateCount(item, increment) {
             if (item && item.count + increment >= 1 && item.count + increment <= 999 ) {
                 item.count += increment;
@@ -154,6 +131,7 @@
                 }
             }
         }
+
     }
 
 }(window.angular));

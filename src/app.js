@@ -4,7 +4,6 @@
     var moduleDependencies = [
         'templates-main',
         'ui.router',
-        'ngDragDrop',
         'ui.sortable',
         'ngAnimate',
         'angular-toArrayFilter'
