@@ -4,7 +4,7 @@
     angular.module('itemSetApp')
            .directive('itemList', itemList);
 
-    function itemList($templateCache, $timeout) {
+    function itemList($templateCache) {
         return {
             restriction: 'EA',
             scope: {
@@ -18,7 +18,7 @@
         };
     }
     
-    function ItemList($scope, staticDataService) {
+    function ItemList($scope, $timeout, staticDataService) {
         var vm = this;
         vm.closeModal = closeModal;
         vm.selectItem = selectItem;
@@ -33,7 +33,12 @@
             vm.items = items;
         });
 
+        $timeout(function() {
+            window.scrollTo(0,0);
+        });
+
         function closeModal() {
+            $scope.callback()();
             $scope.modalState = false;
         }
         
@@ -46,7 +51,7 @@
         }
         
         function setItemFilter(filter) {
-            if (filter && filter.tag) {
+            if (filter) {
                 vm.filter.tag = filter.tag
             }
         }

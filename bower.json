@@ -17,6 +17,7 @@
     "jquery-ui": "~1.11.4",
     "angular-ui-sortable": "~0.13.4",
     "angular-animate": "~1.4.4",
-    "angular-toArrayFilter": "~1.0.1"
+    "angular-toArrayFilter": "~1.0.1",
+    "angular-scroll": "~0.7.2"
   }
 }

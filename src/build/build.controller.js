@@ -5,7 +5,7 @@
         .module('itemSetApp')
         .controller('BuildController', BuildController);
 
-    function BuildController($q, $stateParams, staticDataService, $location, $anchorScroll) {
+    function BuildController($q, $stateParams, $timeout, staticDataService) {
         var vm = this;
         vm.summonerLevelRange = summonerLevelRange;
         vm.updateCount = updateCount;
@@ -15,6 +15,7 @@
         vm.editBlock = editBlock;
         vm.removeItemFromBlock = removeItemFromBlock;
         vm.getItemById = getItemById;
+        vm.scrollToCallback = scrollToCallback;
         vm.itemSet = {
             'who': {
                 lastEdit: new Date(),
@@ -106,6 +107,7 @@
         }
         
         function addItemToBlock(block) {
+            vm.blockToEdit = block;
             vm.blockToAddItemTo = block;
             vm.showItemList = true;
         }
@@ -130,6 +132,13 @@
                     return item;
                 }
             }
+        }
+        
+        function scrollToCallback() {
+            var element = angular.element('#block-' + vm.blockToEdit.$$hashKey.replace('object:',''));
+            $timeout(function() {
+                window.scrollTo(0,element[0].offsetTop);
+            });
         }
 
     }

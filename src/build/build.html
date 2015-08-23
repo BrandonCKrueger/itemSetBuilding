@@ -39,7 +39,9 @@
                    ng-if="buildVm.itemSet.editable"></i>
             </div>
 
-            <div class="item-build-block" ng-repeat="block in buildVm.itemSet.blocks" id="block-{{block.$$hashKey}}">
+            <div class="item-build-block"
+                 ng-repeat="block in buildVm.itemSet.blocks"
+                 id="block-{{block.$$hashKey.replace('object:','')}}">
                 <header>
                     <input type="text" placeholder="Block Name" ng-model="block.type" ng-if="buildVm.itemSet.editable" />
                     <strong ng-bind="block.type" ng-if="!buildVm.itemSet.editable"></strong>
@@ -163,7 +165,7 @@
                     
 <item-list class="item-list"
            block-to-add-item-to="buildVm.blockToAddItemTo"
-           callback="buildVm.scrollToBlock"
+           callback="buildVm.scrollToCallback"
            modal-state="buildVm.showItemList"
            ng-if="buildVm.showItemList"
            ng-animate="'animate'"></item-list>
