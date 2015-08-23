@@ -38,7 +38,7 @@
             var deferred = $q.defer();
 
             for (var i = 0; i < _topBuilds.length; i++) {
-                if (_topBuilds[i].championName == _currentChampion) {
+                if (_topBuilds[i].championName == _currentChampion.name) {
                     deferred.resolve(_topBuilds[i]);
                 }
                 else {

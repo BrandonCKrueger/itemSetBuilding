@@ -6,7 +6,8 @@
         'ui.router',
         'ngDragDrop',
         'ui.sortable',
-        'ngAnimate'
+        'ngAnimate',
+        'angular-toArrayFilter'
     ];
 
     angular

@@ -1,0 +1,26 @@
+<div class="full-screen-overlay"></div>
+<div class="row">
+	<header class="col-xs-12">
+		<input type="text"
+			   ng-model="itemListVm.filter.name"
+			   placeholder="Search for an item..." />
+		<button class="btn btn-default btn-xs"
+				ng-repeat="tag in itemListVm.itemTags"
+				ng-class="{ 'btn-success' : itemListVm.filter.tag === tag }"
+				ng-bind="tag | addSpaces"
+				ng-click="itemListVm.setItemFilter({tag: tag})"></button>
+	</header>
+	
+	<div class="col-xs-12">
+		<div class="item"
+				ng-repeat="item in itemListVm.items |
+					toArray |
+					filter: itemListVm.filterItemList"
+				ng-click="itemListVm.selectItem(item)">
+			<img ng-src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/{{item.id}}.png" />
+			<span class="item-info" ng-bind="item.name"></span>
+		</div>
+	</div>
+	
+	<i class="fa fa-times close-modal" ng-click="itemListVm.closeModal()"></i>
+</div>

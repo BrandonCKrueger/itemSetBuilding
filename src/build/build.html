@@ -1,7 +1,6 @@
 <section class="container build">
-    <h2>Build</h2>
     <div class="row">
-        <div class="col-md-6 item-build">
+        <div class="col-xs-12 item-build">
             <div class="row item-build-details">
                 <div class="col-xs-12 col-sm-6">
                     <label>Title: </label>
@@ -35,15 +34,19 @@
                     <span ng-if="buildVm.itemSet.map === 'CS'">Crystal Score</span>
                     <span ng-if="buildVm.itemSet.map === 'HA'">Howling Abyss</span>
                 </div>
-                <i class="fa fa-cog" ng-click="buildVm.editDetails = true;"></i>
+                <i class="fa fa-cog"
+                   ng-click="buildVm.editDetails = true;"
+                   ng-if="buildVm.itemSet.editable"></i>
             </div>
 
             <div class="item-build-block" ng-repeat="block in buildVm.itemSet.blocks">
                 <header>
-                    <input type="text" placeholder="Block Name" ng-model="block.type" />
+                    <input type="text" placeholder="Block Name" ng-model="block.type" ng-if="buildVm.itemSet.editable" />
+                    <strong ng-bind="block.type" ng-if="!buildVm.itemSet.editable"></strong>
                     <div class="btn btn-default rec-math pull-right"
                          ng-class="{'btn-success': block.recMath}"
-                         ng-click="block.recMath = !block.recMath">
+                         ng-click="block.recMath = !block.recMath"
+                         ng-if="buildVm.itemSet.editable">
                         Rec Math: On
                     </div>
                 </header>
@@ -55,22 +58,31 @@
                     <ul ui-sortable ng-model="block.items">
                         <li ng-repeat="item in block.items track by $index">
                             <div class="item">
-                                <img ng-src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/{{buildVm.items[item.id].id}}.png" />
+                                <img ng-src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/{{item.id}}.png" />
                                 <span class="item-info" ng-bind="buildVm.items[item.id].name"></span>
                                 <div class="rec-math" ng-if="block.recMath && !$first">
                                     <i class="fa" ng-class="{'fa-arrow-right': $last, 'fa-plus': !$last}"></i>
                                 </div>
                                 <div class="btn btn-default quantity">
-                                    <i class="fa fa-minus" ng-click="buildVm.updateCount(item,-1)" ng-class="{'disabled': item.count <= 1}"></i>
+                                    <i class="fa fa-minus"
+                                       ng-click="buildVm.updateCount(item,-1)"
+                                       ng-class="{'disabled': item.count <= 1}"
+                                       ng-if="buildVm.itemSet.editable"></i>
                                     <span ng-bind="item.count"></span>
-                                    <i class="fa fa-plus" ng-click="buildVm.updateCount(item,1)" ng-class="{'disabled': item.count >= 999}"></i>
+                                    <i class="fa fa-plus"
+                                       ng-click="buildVm.updateCount(item,1)"
+                                       ng-class="{'disabled': item.count >= 999}"
+                                       ng-if="buildVm.itemSet.editable"></i>
                                 </div>
+                                <i class="fa fa-times" ng-click="buildVm.removeItemFromBlock(item, block)"></i>
                             </div>
                         </li>
                     </ul>
-                    <ul>
+                    <ul ng-if="buildVm.itemSet.editable">
                         <li>
-                            <div class="add-item" ng-if="block.items.length < 6">
+                            <div class="add-item"
+                                 ng-if="block.items.length < 6"
+                                 ng-click="buildVm.addItemToBlock(block)">
                                 <i class="fa fa-plus"></i>
                             </div>
                         </li>
@@ -81,7 +93,9 @@
                 <section class="restrictions">
                     <header>
                         <h5>
-                            <i class="fa fa-cog" ng-click="buildVm.editBlock(block, $event);"></i>
+                            <i class="fa fa-cog"
+                               ng-click="buildVm.editBlock(block, $event);"
+                               ng-if="buildVm.itemSet.editable"></i>
                             Restrictions
                         </h5>
                     </header>
@@ -101,27 +115,16 @@
                     </div>
                 </section>
             </div>
-            <div class="add-item-block" ng-click="buildVm.addBlock()">
+            <div class="add-item-block" ng-click="buildVm.addBlock()" ng-if="buildVm.itemSet.editable">
                 <i class="fa fa-plus"></i>
                 <span> Add Block</span>
             </div>
         </div>
-
-        <div class="col-md-6 item-list">
+        
+        <div class="col-md-6 col-xs-12" ng-if="!buildVm.itemSet.editable">
             <header class="row">
-                Item filter...
+                Related Builds
             </header>
-            <div class="row">
-                <div class="item"
-                     ng-repeat="(itemId, itemData) in buildVm.items"
-                     data-drag="true"
-                     data-jqyoui-options="{revert: 'invalid'}"
-                     jqyoui-draggable="{animate:true, placeholder:true}"
-                     data-item-id="{{itemId}}">
-                    <img src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/3001.png2" />
-                    <span class="item-info" ng-bind="itemData.name"></span>
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -137,3 +140,9 @@
                     modal-state="buildVm.editBlockDetails"
                     ng-if="buildVm.editBlockDetails"
                     ng-animate="'animate'"></edit-block-details>
+                    
+<item-list class="item-list"
+           block-to-add-item-to="buildVm.blockToAddItemTo"
+           modal-state="buildVm.showItemList"
+           ng-if="buildVm.showItemList"
+           ng-animate="'animate'"></item-list>
