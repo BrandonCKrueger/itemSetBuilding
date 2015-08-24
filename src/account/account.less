@@ -1,0 +1,88 @@
+.account-directive {
+	
+	.account {
+		position: fixed;
+		top: 5px;
+		right: 10px;
+		
+		span {
+			position: relative;
+			-webkit-transform: translate(35px, 0);
+			transform: translate(35px, 0);
+			transition: all .15s;
+		}
+	}
+	
+	.full-screen-overlay {
+		&.ng-enter,
+		&.ng-leave {
+			.ease-in-out-transition(0.5s);
+		}
+		&.ng-enter,
+		&.ng-leave.ng-leave-active {
+			opacity: 0;
+		}
+		&.ng-leave,
+		&.ng-enter.ng-enter-active {
+			opacity: 0.75;
+		}
+	}
+	
+	>.row {
+		position: absolute;
+		margin-right: 0;
+		right: 0;
+		top: 10%;
+		width: 500px;
+		background-color: #fefefe;
+		box-shadow: 2px 2px 2px #888;
+		padding: 10px;
+		.soft-rounded-corners;
+	
+		header {
+			width: 100%;
+			position: relative;
+			margin-bottom: 10px;
+			color: #959595;
+			
+			input {
+				width: 100%;
+			}
+		}
+		
+		&.ng-enter,
+		&.ng-leave {
+			.ease-in-out-transition(0.5s);
+		}
+		&.ng-enter,
+		&.ng-leave.ng-leave-active {
+			top: -100%;
+		}
+		&.ng-leave,
+		&.ng-enter.ng-enter-active {
+			top: 10%;
+		}
+	}
+	
+	header {
+		border-bottom: @defaultBorder;
+	}
+	
+	footer {
+		margin-top: 5px;
+		padding-top: 5px;
+		border-top: @defaultBorder;
+		text-align: center;
+	}
+	
+	.close-modal {
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		
+		&:hover {
+			color: @brand-danger;
+			cursor: pointer;
+		}
+	}
+}

@@ -1,0 +1,88 @@
+<div class="account">
+	<button class="btn btn-sm btn-default" ng-click="accountVm.showAccountInfo = true">
+		<i class="fa fa-user"></i>
+		<span> | My Account</span>
+	</button>
+</div>
+
+<div class="full-screen-overlay" ng-if="accountVm.showAccountInfo"></div>
+<div class="row" ng-if="accountVm.showAccountInfo">
+	<header class="col-xs-12">
+		<label>My Account</label>
+	</header>
+	
+	<div class="col-xs-12" ng-if="!accountVm.account">
+		<form name="accountForm">
+			<div class="form-group">
+				<label for="username">Email Address: </label>
+				<input type="email"
+					   class="form-control"
+					   name="email"
+					   id="email"
+					   ng-model="accountVm.email"
+					   placeholder="Email"
+					   ng-disabled="accountVm.processing" />
+			</div>
+			<div class="form-group">
+				<label for="password">Password: </label>
+				<input type="password"
+					   class="form-control"
+					   name="password"
+					   id="password"
+					   ng-model="accountVm.password"
+					   placeholder="Password"
+					   ng-disabled="accountVm.processing" />
+			</div>
+		</form>
+	</div>
+	
+	<div class="col-xs-12" ng-if="accountVm.account">
+		<label ng-bind="accountVm.account.username"></label>
+		<div>
+			<strong>My Builds</strong>
+			<ul>
+				<li>
+					<span>Build Name</span>
+					<span>(Public)</span>
+				</li>
+				<li>
+					<span>Build Name</span>
+					<span>(Private)</span>
+				</li>
+				<li>
+					<span>Build Name</span>
+					<span>(Private)</span>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<strong>My Favorite Builds</strong>
+			<ul>
+				<li>Build #1</li>
+				<li>Build #2</li>
+				<li>Build #3</li>
+			</ul>
+		</div>
+	</div>
+	
+	<footer class="col-xs-12" ng-if="!accountVm.processing">
+		<button class="btn btn-default" ng-click="accountVm.closeModal()">
+			<i class="fa fa-times"></i>
+			<span> | Cancel </span>
+		</button>
+		<button class="btn btn-default" ng-if="!accountVm.account" ng-click="accountVm.login()">
+			<i class="fa fa-sign-in"></i>
+			<span> | Login</span>
+		</button>
+		<button class="btn btn-default" ng-if="accountVm.account" ng-click="accountVm.logout()">
+			<i class="fa fa-sign-out"></i>
+			<span> | Logout</span>
+		</button>
+	</footer>
+	<footer class="col-xs-12" ng-if="accountVm.processing">
+		<i class="fa fa-spinner fa-spin"></i>
+		<span>Signing In...</span>
+	</footer>
+	
+	<i class="fa fa-times close-modal" ng-click="accountVm.closeModal()"></i>
+</div>

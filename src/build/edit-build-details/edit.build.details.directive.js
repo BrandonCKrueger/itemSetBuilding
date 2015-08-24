@@ -14,7 +14,7 @@
             },
             controller: EditBuildDetails,
             controllerAs: 'buildDetailsVm',
-            template: $templateCache.get('build/edit.build.details.html')
+            template: $templateCache.get('build/edit-build-details/edit.build.details.html')
         };
     }
     

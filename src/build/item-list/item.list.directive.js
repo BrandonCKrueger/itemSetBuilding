@@ -14,7 +14,7 @@
             },
             controller: ItemList,
             controllerAs: 'itemListVm',
-            template: $templateCache.get('build/item.list.html')
+            template: $templateCache.get('build/item-list/item.list.html')
         };
     }
     

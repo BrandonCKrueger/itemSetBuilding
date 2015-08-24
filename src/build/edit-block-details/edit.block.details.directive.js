@@ -14,7 +14,7 @@
             },
             controller: EditBlockDetails,
             controllerAs: 'blockDetailsVm',
-            template: $templateCache.get('build/edit.block.details.html')
+            template: $templateCache.get('build/edit-block-details/edit.block.details.html')
         };
     }
     
