@@ -5,42 +5,29 @@
         .module('itemSetApp')
         .controller('ChampionController', ChampionController);
 
-    function ChampionController($stateParams, staticDataService) {
+    function ChampionController($stateParams, staticDataService, itemSetDetailsService) {
         var vm = this;
-        vm.builds = [
-            {
-                id: 1,
-                rating: 5,
-                commentCount: 1200,
-                title: 'First Title',
-                author: 'First Author',
-                date: '08/06/15'
-            },
-            {
-                id: 2,
-                rating: 4,
-                commentCount: 89,
-                title: 'Second Build Second Build Second Build Second Build Second Build Second Build',
-                author: 'Second Author',
-                date: '08/06/15'
-            },
-            {
-                id: 3,
-                rating: 5,
-                commentCount: 1200,
-                title: 'First Title',
-                author: 'First Author',
-                date: '08/06/15'
-            },
-            {
-                id: 4,
-                rating: 4,
-                commentCount: 89,
-                title: 'Second Build',
-                author: 'Second Author',
-                date: '08/06/15'
-            }
-        ];
+
+        staticDataService.getChampionByName($stateParams.championName).then(function(champion) {
+            itemSetDetailsService.getItemBuildsByChampionId(champion.id).then(function(response) {
+                var builds = [];
+                for(var i = 0; i < response.length; i++) {
+                    builds.push({
+                        id: response[i]._id,
+                        rating: response[i].averageRating,
+                        commentCount: response[i].commentCount,
+                        title: response[i].itemSetDetails.title,
+                        author: response[i].who.createdBy.user,
+                        date: response[i].who.lastEdit
+                    });
+                }
+                vm.builds = builds;
+            }).catch(function(error) {
+                console.log({'Error:':error});
+            });
+        }).catch(function(error) {
+            console.log({'Error:':error});
+        });
 
         staticDataService.getChampionByName($stateParams.championName).then(function(champion) {
             vm.champion = champion;

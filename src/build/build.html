@@ -4,51 +4,51 @@
             <div class="row item-build-details">
                 <div class="col-xs-6">
                     <label>Title: </label>
-                    <span ng-bind="buildVm.itemSet.title"></span>
+                    <span ng-bind="buildVm.itemSet.itemSetDetails.title"></span>
                 </div>
                 <div class="col-xs-6">
                     <label>Type: </label>
-                    <span ng-bind="buildVm.itemSet.type" style="text-transform: capitalize;"></span>
+                    <span ng-bind="buildVm.itemSet.itemSetDetails.type" style="text-transform: capitalize;"></span>
                 </div>
                 <div class="col-xs-6">
                     <label>Priority: </label>
-                    <span ng-if="!buildVm.itemSet.priority">No</span>
-                    <span ng-if="buildVm.itemSet.priority">Yes</span>
+                    <span ng-if="!buildVm.itemSet.itemSetDetails.priority">No</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.priority">Yes</span>
                 </div>
                 <div class="col-xs-6">
                     <label>Sort Rank: </label>
-                    <span ng-bind="buildVm.itemSet.sortrank"></span>
+                    <span ng-bind="buildVm.itemSet.itemSetDetails.sortrank"></span>
                 </div>
                 <div class="col-xs-6">
                     <label>Mode: </label>
-                    <span ng-if="buildVm.itemSet.mode === 'any'">All Modes</span>
-                    <span ng-if="buildVm.itemSet.mode === 'CLASSIC'">Classic</span>
-                    <span ng-if="buildVm.itemSet.mode === 'ARAM'">ARAM</span>
-                    <span ng-if="buildVm.itemSet.mode === 'ODIN'">Dominion</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.mode === 'any'">All Modes</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.mode === 'CLASSIC'">Classic</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.mode === 'ARAM'">ARAM</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.mode === 'ODIN'">Dominion</span>
                 </div>
                 <div class="col-xs-6">
                     <label>Map: </label>
-                    <span ng-if="buildVm.itemSet.map === 'any'">All Maps</span>
-                    <span ng-if="buildVm.itemSet.map === 'SR'">Summoners Rift</span>
-                    <span ng-if="buildVm.itemSet.map === 'TT'">Twisted Treeline</span>
-                    <span ng-if="buildVm.itemSet.map === 'CS'">Crystal Score</span>
-                    <span ng-if="buildVm.itemSet.map === 'HA'">Howling Abyss</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.map === 'any'">All Maps</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.map === 'SR'">Summoners Rift</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.map === 'TT'">Twisted Treeline</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.map === 'CS'">Crystal Score</span>
+                    <span ng-if="buildVm.itemSet.itemSetDetails.map === 'HA'">Howling Abyss</span>
                 </div>
                 <i class="fa fa-cog"
                    ng-click="buildVm.editDetails = true;"
-                   ng-if="buildVm.itemSet.editable"></i>
+                   ng-if="buildVm.editable"></i>
             </div>
 
             <div class="item-build-block"
-                 ng-repeat="block in buildVm.itemSet.blocks"
+                 ng-repeat="block in buildVm.itemSet.itemSetDetails.blocks"
                  id="block-{{block.$$hashKey.replace('object:','')}}">
                 <header>
-                    <input type="text" placeholder="Block Name" ng-model="block.type" ng-if="buildVm.itemSet.editable" />
-                    <strong ng-bind="block.type" ng-if="!buildVm.itemSet.editable"></strong>
+                    <input type="text" placeholder="Block Name" ng-model="block.type" ng-if="buildVm.editable" />
+                    <strong ng-bind="block.type" ng-if="!buildVm.editable"></strong>
                     <div class="btn btn-default rec-math pull-right"
                          ng-class="{'btn-success': block.recMath}"
                          ng-click="block.recMath = !block.recMath"
-                         ng-if="buildVm.itemSet.editable">
+                         ng-if="buildVm.editable">
                         Rec Math: On
                     </div>
                 </header>
@@ -65,18 +65,20 @@
                                     <i class="fa fa-minus"
                                        ng-click="buildVm.updateCount(item,-1)"
                                        ng-class="{'disabled': item.count <= 1}"
-                                       ng-if="buildVm.itemSet.editable"></i>
+                                       ng-if="buildVm.editable"></i>
                                     <span ng-bind="item.count"></span>
                                     <i class="fa fa-plus"
                                        ng-click="buildVm.updateCount(item,1)"
                                        ng-class="{'disabled': item.count >= 999}"
-                                       ng-if="buildVm.itemSet.editable"></i>
+                                       ng-if="buildVm.editable"></i>
                                 </div>
-                                <i class="fa fa-times" ng-click="buildVm.removeItemFromBlock(item, block)"></i>
+                                <i class="fa fa-times"
+                                   ng-if=""
+                                   ng-click="buildVm.removeItemFromBlock(item, block)"></i>
                             </div>
                         </li>
                     </ul>
-                    <ul ng-if="buildVm.itemSet.editable">
+                    <ul ng-if="buildVm.editable">
                         <li>
                             <div class="add-item"
                                  ng-if="block.items.length < 6"
@@ -93,7 +95,7 @@
                         <h5>
                             <i class="fa fa-cog"
                                ng-click="buildVm.editBlock(block, $event);"
-                               ng-if="buildVm.itemSet.editable"></i>
+                               ng-if="buildVm.editable"></i>
                             Restrictions
                         </h5>
                     </header>
@@ -113,13 +115,13 @@
                     </div>
                 </section>
             </div>
-            <div class="add-item-block" ng-click="buildVm.addBlock()" ng-if="buildVm.itemSet.editable">
+            <div class="add-item-block" ng-click="buildVm.addBlock()" ng-if="buildVm.editable">
                 <i class="fa fa-plus"></i>
                 <span> Add Block</span>
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-6" ng-if="buildVm.itemSet.editable">
+        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-6" ng-if="buildVm.editable">
             <header class="row author-notes">
                 <div class="col-xs-12">
                     <label>Author's Notes</label>
@@ -136,14 +138,15 @@
                     <textarea></textarea>
                 </div>
                 <div class="col-xs-12">
-                    <button class="btn btn-default">
-                        Save Build
+                    <button class="btn btn-default save-author-notes">
+                        <i class="fa fa-floppy-o"></i>
+                        <span> | Save Build</span>
                     </button>
                 </div>
             </header>
         </div>
 
-        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-6" ng-if="!buildVm.itemSet.editable">
+        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-6" ng-if="!buildVm.editable">
             <header class="row">
                 Related Builds
             </header>
@@ -169,3 +172,8 @@
            modal-state="buildVm.showItemList"
            ng-if="buildVm.showItemList"
            ng-animate="'animate'"></item-list>
+           
+<download-build class="download-build"
+           modal-state="buildVm.downloadBuild"
+           ng-if="buildVm.downloadBuild"
+           ng-animate="'animate'"></download-build>

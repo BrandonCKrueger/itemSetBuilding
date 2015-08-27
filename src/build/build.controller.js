@@ -5,7 +5,7 @@
         .module('itemSetApp')
         .controller('BuildController', BuildController);
 
-    function BuildController($q, $stateParams, $timeout, staticDataService) {
+    function BuildController($scope, $q, $stateParams, $timeout, staticDataService, itemSetDetailsService, accountManager) {
         var vm = this;
         vm.summonerLevelRange = summonerLevelRange;
         vm.updateCount = updateCount;
@@ -16,48 +16,20 @@
         vm.removeItemFromBlock = removeItemFromBlock;
         vm.getItemById = getItemById;
         vm.scrollToCallback = scrollToCallback;
-        vm.itemSet = {
-            'who': {
-                lastEdit: new Date(),
-                createdDate: new Date(),
-                createdBy: {
-                    userId: 1,
-                    user: 'Polixo'
-                },
-                public: true
-            },
-            "editable": true,
-            "title": "The name of the page",
-            "type": "custom",
-            "map": "any",
-            "mode": "any",
-            "priority": false,
-            "sortrank": 0,
-            "blocks": [
-                {
-                    "type": "A block with just boots",
-                    "recMath": true,
-                    "minSummonerLevel": -1,
-                    "maxSummonerLevel": -1,
-                    "showIfSummonerSpell": "",
-                    "hideIfSummonerSpell": "",
-                    "items": [
-                        {
-                            "id": "3725",
-                            "count": 1
-                        },
-                        {
-                            "id": "3725",
-                            "count": 1
-                        },
-                        {
-                            "id": "3725",
-                            "count": 1
-                        }
-                    ]
-                }
-            ]
-        };
+        vm.saveItemSet = saveItemSet;
+
+        itemSetDetailsService.getItemBuildById($stateParams.buildId).then(function(itemBuild) {
+            vm.itemSet = itemBuild[0];
+            updateEditableStatus(accountManager.getAccount());
+            $scope.$on('login', function(event, account) {
+                updateEditableStatus(account);
+            });
+            $scope.$on('logout', function(event) {
+                updateEditableStatus(null);
+            });
+        }).catch(function(error) {
+            console.log({error: error});
+        });
         
         staticDataService.getChampions().then(function(champions) {
             vm.championList = champions;
@@ -65,10 +37,6 @@
         staticDataService.getItems().then(function(items) {
             vm.items = items;
         });
-        
-        if ($stateParams.edit === 'edit') {
-            vm.edit = true;
-        }
         
         function summonerLevelRange(block) {
             var output = '';
@@ -139,6 +107,18 @@
             $timeout(function() {
                 window.scrollTo(0,element[0].offsetTop);
             });
+        }
+        
+        function updateEditableStatus(account) {
+            if (account && vm.itemSet.who.createdBy.userId === account.id) {
+                vm.editable = true;
+            } else {
+                vm.editable = false;
+            }
+        }
+
+        function saveItemSet() {
+            console.log(vm.itemSet);
         }
 
     }

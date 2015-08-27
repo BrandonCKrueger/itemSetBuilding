@@ -10,15 +10,15 @@
     </head>
 
     <body>
+        <champion-banner></champion-banner>
+
+        <div id="content-main" ui-view></div>
+
         <header id="banner-bar">
             <div class="logo">[Image Here]</div>
             <div class="logo-text">Set Builder</div>
         </header>
 
-        <champion-banner></champion-banner>
-        
-        <div id="content-main" ui-view></div>
-        
         <account-directive class="account-directive"></account-directive>
 
         <script src="js/external.js" type="text/javascript"></script>

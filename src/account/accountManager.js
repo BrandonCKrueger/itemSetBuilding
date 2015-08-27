@@ -5,22 +5,13 @@
         .module('itemSetApp')
         .factory('accountManager', accountManager);
 
-    function accountManager($q, $http) {
+    function accountManager($rootScope, $q, $http, userService) {
 		var _account = null;
-        _account = {
-            username: 'Polixo',
-            myBuilds: [
-                { id: 1, name: 'Build #1'},
-                { id: 2, name: 'Build #2'}
-            ],
-            myFavBuilds: [
-                { id: 3, name: 'Build #3'},
-                { id: 4, name: 'Build #4'}
-            ]
-        }; // todo: Remove hardcoded
-		
+
         var factory = {
             getAccount: getAccount,
+            getCredentials: getCredentials,
+            register: register,
 			login: login,
 			logout: logout,
             addToMyBuilds: addToMyBuilds,
@@ -29,38 +20,56 @@
         return factory;
 
         function getAccount() {
-            return _account;
+            if(_account) {
+                return _account;
+            } else {
+                return {};
+            }
+            
+        }
+
+        function getCredentials() {
+            var deferred = $q.defer();
+
+            userService.getCredentials().then(function(user) {
+                _account = user;
+                deferred.resolve(_account);
+            });
+
+            return deferred.promise;
+        }
+
+        function register(email, password, username) {
+            var deferred = $q.defer();
+
+            userService.register(email, password, username).then(function(user) {
+                _account = user;
+                deferred.resolve(_account);
+            });
+
+            return deferred.promise;
         }
 		
 		function login(username, password) {
 			var deferred = $q.defer();
-            
-            deferred.resolve(_account);
-            // $http({
-            //     method: 'POST',
-            //     url: 'login'
-            // }).then(function(account) {
-            //     _account = account;
-            //     deferred.resolve(_account);
-            // }).catch(function(error) {
-            //     deferred.reject(error);
-            // });
+
+            userService.login(username, password).then(function(user) {
+                _account = user;
+                $rootScope.$broadcast('login', _account);
+                deferred.resolve(_account);
+            });
 
             return deferred.promise;
 		}
         
         function logout() {
             var deferred = $q.defer();
-            
-            // $http({
-            //     method: 'POST',
-            //     url: 'logout'
-            // }).then(function(response) {
-            //     _account = null;
-            //     deferred.resolve(null);
-            // }).catch(function(error) {
-            //     deferred.reject(error);
-            // });
+
+            userService.logout().then(function(response) {
+                _account = null;
+                $rootScope.$broadcast('logout');
+                deferred.resolve(_account);
+            });
 
             return deferred.promise;
         }

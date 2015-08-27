@@ -1,0 +1,19 @@
+<div class="full-screen-overlay" ng-if="downloadVm.modalState"></div>
+<div class="row" ng-if="downloadVm.modalState">
+	<header class="col-xs-12">
+		<label>Download Item Set</label>
+	</header>
+	
+	<div class="col-xs-12">
+		Instructions for download here!
+	</div>
+	
+	<footer class="col-xs-12">
+		<button class="btn btn-default" ng-click="downloadVm.closeModal()">
+			<i class="fa fa-times"></i>
+			<span> | Close </span>
+		</button>
+	</footer>
+	
+	<i class="fa fa-times close-modal" ng-click="downloadVm.closeModal()"></i>
+</div>

@@ -11,10 +11,15 @@
 
     angular
         .module('itemSetApp', moduleDependencies)
-        .config(setDefaultRoute);
+        .config(setDefaultRoute)
+        .config(['$httpProvider', function($httpProvider) {
+            $httpProvider.defaults.withCredentials = true;
+        }]);
 
     function setDefaultRoute($urlRouterProvider) {
         $urlRouterProvider.when('', '/');
     }
+    
+    
 
 }(window.angular));
