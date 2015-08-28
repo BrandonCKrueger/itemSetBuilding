@@ -13,8 +13,12 @@
         };
     }
     
-    function ChampionBanner($scope, bannerManager, staticDataService, itemSetDetailsService) {
+    function ChampionBanner($scope, $state, bannerManager, staticDataService, itemSetDetailsService, accountManager) {
         var vm = this;
+        vm.build = null;
+        vm.createItemSet = createItemSet;
+        vm.copyItemSet = copyItemSet;
+        vm.downloadItemSet = downloadItemSet;
         vm.starShadeClass = starShadeClass;
         vm.champion = bannerManager.getCurrentChampion();
         
@@ -28,6 +32,66 @@
             }
         });
 
+        function createItemSet() {
+            var account = accountManager.getAccount();
+            if (account.username && account.id) {
+                var build = {
+                    _id: 0,
+                    itemSetDetails: {
+                        title: account.username + '\'s New Build',
+                        type: 'custom',
+                        map: 'any',
+                        mode: 'any',
+                        priority: false,
+                        sortrank: 0,
+                        blocks: []
+                    },
+                    who: {
+                        createdDate: new Date(),
+                        createdBy: {
+                            userId: account.id,
+                            user: account.username
+                        },
+                        public: false
+                    },
+                    champion: vm.build.champion,
+                    role: 'General',
+                    authorNotes: ''
+                };
+                $state.go('build', {build: build});
+            } else {
+                console.log('Hey, you should not be able to do this!');
+            }
+        }
+
+        function copyItemSet() {
+            var account = accountManager.getAccount();
+            if (account.username && account.id) {
+                var build = {
+                    itemSetDetails: vm.build.itemSetDetails,
+                    champion: vm.build.champion,
+                    role: vm.build.role,
+                    who: {
+                        createdDate: new Date(),
+                        createdBy: {
+                            userId: account.id,
+                            user: account.username
+                        },
+                        public: false
+                    },
+                    authorNotes: ''
+                };
+                build.itemSetDetails.title = account.username + '\'s copy of ' + build.itemSetDetails.title;
+                $state.go('build', {build: build});
+            } else {
+                console.log('Hey, you should not be able to do this!');
+            }
+        }
+
+        function downloadItemSet() {
+            
+        }
+
         function starShadeClass(averageRating, lowerBound) {
             if (averageRating < lowerBound + 0.5) {
                 return 'fa-star-o';
@@ -40,11 +104,16 @@
         
         // private functions
         function stateChangedToBuild(params) {
-            itemSetDetailsService.getItemBuildById(params.buildId).then(function(builds) {
-                vm.build = builds[0];
-            }).catch(function(error) {
-                console.log({error: error});
-            });
+            if (params.buildId) {
+                itemSetDetailsService.getItemBuildById(params.buildId).then(function(builds) {
+                    vm.build = builds[0];
+                }).catch(function(error) {
+                    console.log({error: error});
+                });
+            } else if (params.build) {
+                vm.build = params.build;
+                vm.build.noData = true;
+            }
         }
 
         function stateChangedToChampion(params) {
@@ -64,7 +133,6 @@
             var champion = staticDataService.getRandomChampion();
             bannerManager.setCurrentChampion(champion);
             bannerManager.getCurrentChampionBannerBuild().then(function(build) {
-                console.log(build);
                 vm.build = build;
             }).catch(function(error) {
                 console.log({error: error});

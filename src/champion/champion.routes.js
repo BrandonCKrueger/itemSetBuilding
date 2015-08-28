@@ -11,14 +11,8 @@
             .state('champion', {
                 controller: 'ChampionController as championVm',
                 templateUrl: 'champion/champion.html',
-                url: '/champion/:championName',
-                onEnter: onEnter
+                url: '/champion/:championName'
             });
-            
-        function onEnter($state, staticDataService, bannerManager) {
-            // var champion = staticDataService.getChampionByName($state.params.championName);
-            // bannerManager.setCurrentChampion(champion);
-        }
     }
 
 }(window.angular));

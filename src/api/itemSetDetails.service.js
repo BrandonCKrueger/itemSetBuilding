@@ -168,33 +168,36 @@
             return deferred.promise;
         }
         
-        function insertItemSetBuild(itemSetDetails, champion) {
+        function insertItemSetBuild(itemSet) {
             var deferred = $q.defer();
-            var itemSetDetailsData = {
-                'title': itemSetDetails.title,
-                'type': itemSetDetails.type,
-                'map': itemSetDetails.map,
-                'mode': itemSetDetails.mode,
-                'priority': itemSetDetails.priority,
-                'sortrank': itemSetDetails.sortrank
+
+            var payload = {
+                itemSetDetails: {
+                    title: itemSet.itemSetDetails.title,
+                    type: itemSet.itemSetDetails.type,
+                    map: itemSet.itemSetDetails.map,
+                    mode: itemSet.itemSetDetails.mode,
+                    priority: itemSet.itemSetDetails.priority,
+                    sortrank: itemSet.itemSetDetails.sortrank,
+                    blocks: itemSet.itemSetDetails.blocks
+                },
+                champion: {
+                    championId: itemSet.champion.championId,
+                    championName: itemSet.champion.championName
+                },
+                role: itemSet.role,
+                authorNotes: itemSet.authorNotes
             };
-            var championData = {
-                'championId': champion.championId,
-                'championName': champion.championName
-            };
-            
+
             $http({
                 method: 'POST',
                 url: apiConfig.domain + '/api/itemSetBuild',
-                data: {
-                    itemSetDetails: itemSetDetailsData,
-                    champion: championData
-                }
+                data: payload
             }).then(function(response) {
                 if (response.status === 200) {
-                    deferred.resolve(response.data);
+                    deferred.resolve(response);
                 } else {
-                    deferred.reject(response.data);
+                    deferred.reject(response);
                 }
             }).catch(function(error) {
                 deferred.reject(error);
@@ -203,25 +206,30 @@
             return deferred.promise;
         }
         
-        function updateItemSetBuild(buildId, itemSetDetails) {
+        function updateItemSetBuild(itemSet) {
             var deferred = $q.defer();
-            var itemSetDetailsData = {
-                'title': itemSetDetails.title,
-                'type': itemSetDetails.type,
-                'map': itemSetDetails.map,
-                'mode': itemSetDetails.mode,
-                'priority': itemSetDetails.priority,
-                'sortrank': itemSetDetails.sortrank,
-                'blocks': itemSetDetails.blocks,
-                'authorNotes': itemSetDetails.authorNotes
+
+            var payload = {
+                itemSetDetails: {
+                    title: itemSet.itemSetDetails.title,
+                    type: itemSet.itemSetDetails.type,
+                    map: itemSet.itemSetDetails.map,
+                    mode: itemSet.itemSetDetails.mode,
+                    priority: itemSet.itemSetDetails.priority,
+                    sortrank: itemSet.itemSetDetails.sortrank,
+                    blocks: itemSet.itemSetDetails.blocks
+                },
+                champion: {
+                    championId: itemSet.champion.championId,
+                    championName: itemSet.champion.championName
+                },
+                role: itemSet.role,
+                authorNotes: itemSet.authorNotes
             };
-            
             $http({
                 method: 'PUT',
-                url: apiConfig.domain + '/api/itemSetBuild/' + buildId,
-                data: {
-                    itemSetDetails: itemSetDetailsData
-                }
+                url: apiConfig.domain + '/api/itemSetBuild/' + itemSet._id,
+                data: payload
             }).then(function(response) {
                 if (response && response.data && response.data.ok === 1) {
                     deferred.resolve(true);

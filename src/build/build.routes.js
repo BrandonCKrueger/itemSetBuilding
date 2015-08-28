@@ -11,9 +11,10 @@
             .state('build', {
                 controller: 'BuildController as buildVm',
                 templateUrl: 'build/build.html',
-                url: '/build/:buildId/:edit',
-
-                resolve: {}
+                url: '/build/:buildId',
+                params: {
+                    build: null
+                }
             });
     }
 

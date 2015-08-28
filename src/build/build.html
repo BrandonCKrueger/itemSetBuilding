@@ -19,6 +19,10 @@
                     <label>Sort Rank: </label>
                     <span ng-bind="buildVm.itemSet.itemSetDetails.sortrank"></span>
                 </div>
+                <div class="col-xs-12">
+                    <label>Team Role: </label>
+                    <span ng-bind="buildVm.itemSet.itemSetDetails.role"></span>
+                </div>
                 <div class="col-xs-6">
                     <label>Mode: </label>
                     <span ng-if="buildVm.itemSet.itemSetDetails.mode === 'any'">All Modes</span>
@@ -138,7 +142,7 @@
                     <textarea ng-bind="buildVm.authorNotes"></textarea>
                 </div>
                 <div class="col-xs-12">
-                    <button class="btn btn-default save-author-notes" ng-click="buildVm.saveItemSet()">
+                    <button class="btn btn-default save-author-notes" ng-click="buildVm.saveItemSet()" ng-disabled="buildVm.saving">
                         <i class="fa fa-floppy-o"></i>
                         <span> | Save Build</span>
                     </button>
@@ -176,7 +180,7 @@
 </section>
 
 <edit-build-details class="edit-build-details"
-                    item-set="buildVm.itemSet"
+                    item-set="buildVm.itemSet.itemSetDetails"
                     modal-state="buildVm.editDetails"
                     ng-if="buildVm.editDetails"
                     ng-animate="'animate'"></edit-build-details>

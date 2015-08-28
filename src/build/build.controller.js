@@ -5,7 +5,7 @@
         .module('itemSetApp')
         .controller('BuildController', BuildController);
 
-    function BuildController($scope, $q, $stateParams, $timeout, staticDataService, itemSetDetailsService, accountManager) {
+    function BuildController($scope, $q, $state, $stateParams, $timeout, staticDataService, itemSetDetailsService, accountManager) {
         var vm = this;
         vm.summonerLevelRange = summonerLevelRange;
         vm.updateCount = updateCount;
@@ -17,19 +17,27 @@
         vm.getItemById = getItemById;
         vm.scrollToCallback = scrollToCallback;
         vm.saveItemSet = saveItemSet;
-
-        itemSetDetailsService.getItemBuildById($stateParams.buildId).then(function(itemBuild) {
-            vm.itemSet = itemBuild[0];
+        
+        if ($stateParams.buildId) {
+            itemSetDetailsService.getItemBuildById($stateParams.buildId).then(function(itemBuild) {
+                vm.itemSet = itemBuild[0];
+                updateEditableStatus(accountManager.getAccount());
+                $scope.$on('login', function(event, account) {
+                    updateEditableStatus(account);
+                });
+                $scope.$on('logout', function(event) {
+                    updateEditableStatus(null);
+                });
+            }).catch(function(error) {
+                console.log({error: error});
+            });
+        } else if ($stateParams.build) {
+            vm.itemSet = $stateParams.build;
             updateEditableStatus(accountManager.getAccount());
-            $scope.$on('login', function(event, account) {
-                updateEditableStatus(account);
-            });
-            $scope.$on('logout', function(event) {
-                updateEditableStatus(null);
-            });
-        }).catch(function(error) {
-            console.log({error: error});
-        });
+            vm.editDetails = true;
+        } else {
+            $state.go('champions');
+        }
         
         staticDataService.getChampions().then(function(champions) {
             vm.championList = champions;
@@ -118,7 +126,22 @@
         }
 
         function saveItemSet() {
-            console.log(vm.itemSet);
+            vm.saving = true;
+            if (vm.itemSet && vm.itemSet._id) {
+                itemSetDetailsService.updateItemSetBuild(vm.itemSet).then(function(response) {
+                    vm.saving = false;
+                }).catch(function(error) {
+                    vm.saving = false;
+                    console.log(error);
+                });
+            } else {
+                itemSetDetailsService.insertItemSetBuild(vm.itemSet).then(function(response) {
+                    $state.go('build', {buildId: response.data._id});
+                }).catch(function(error) {
+                    vm.saving = false;
+                    console.log(error);
+                });
+            }
         }
 
     }

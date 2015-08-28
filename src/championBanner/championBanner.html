@@ -3,7 +3,10 @@
     <div>
         <img class="champion-portrait" ng-src="./images/{{championBannerVm.build.champion.championName}}_0.jpg" />
         <section class="champion-details">
-            <div class="champion-details-name" ng-bind="championBannerVm.build.champion.championName"></div>
+            <div class="champion-details-name">
+                <span ng-bind="championBannerVm.build.champion.championName"
+                      ui-sref="champion({championName: championBannerVm.build.champion.championName})"></span>
+            </div>
             <div class="champion-details-top-set" ng-if="!championBannerVm.build.noData">
                 <a ui-sref="build({buildId: championBannerVm.build._id})">
                     <i class="fa fa-link"></i>
@@ -11,7 +14,7 @@
                 </a>
             </div>
             <div class="champion-details-top-set-info" ng-if="!championBannerVm.build.noData">
-                <span ng-bind="::championBannerVm.build.role"></span>
+                <span ng-bind="championBannerVm.build.role"></span>
                 <span class="text-spacer">|</span>
                 <span class="champion-details-top-set-info-rating">
                     <i class="fa fa-star fa-1"
@@ -27,21 +30,26 @@
                 </span>
                 <span class="text-spacer">|</span>
                 <span class="champion-details-top-set-info-comments">
-                    <span ng-bind="::championBannerVm.build.commentCount"></span>
+                    <span ng-bind="championBannerVm.build.commentCount"></span>
                     <span>Comments</span>
                     <i class="fa fa-comments fa-1"></i>
                 </span>
             </div>
-            <div class="champion-details-build-actions">
-                <button class="btn btn-xs btn-default create-item-set">
+            <div class="champion-details-build-actions" ng-if="!championBannerVm.build.noData">
+                <button class="btn btn-xs btn-default create-item-set"
+                        ng-click="championBannerVm.createItemSet()">
                     <i class="fa fa-plus fa-1"></i>
                     <span> | Create Item Set</span>
                 </button>
-                <button class="btn btn-xs btn-default copy-item-set" ng-if="!championBannerVm.build.noData">
+                <button class="btn btn-xs btn-default copy-item-set"
+                        ng-if="!championBannerVm.build.noData"
+                        ng-click="championBannerVm.copyItemSet()">
                     <i class="fa fa-files-o fa-1"></i>
                     <span> | Copy Item Set</span>
                 </button>
-                <button class="btn btn-xs btn-default download-item-set" ng-if="!championBannerVm.build.noData">
+                <button class="btn btn-xs btn-default download-item-set"
+                        ng-if="!championBannerVm.build.noData"
+                         ng-click="championBannerVm.downloadItemSet()">
                     <i class="fa fa-download fa-1"></i>
                     <span> | Download Item Set</span>
                 </button>
