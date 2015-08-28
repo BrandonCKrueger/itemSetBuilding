@@ -2,12 +2,12 @@
     <h2>Champion List</h2>
     <div class="row">
         <div class="champion-info"
-             ng-repeat="(championId, championName) in championsVm.championList"
-             ui-sref="champion({championName: championName})">
+             ng-repeat="champion in championsVm.championList"
+             ui-sref="champion({championName: champion.name})">
             <div>
-                <img ng-src="http://lkimg.zamimg.com/images/v2/champions/icons/size100x100/{{championId}}.png" alt="{{championName}}" />
+                <img ng-src="http://lkimg.zamimg.com/images/v2/champions/icons/size100x100/{{champion.id}}.png" alt="{{champion.name}}" />
                 <div class="overlay"></div>
-                <div class="champion-info-name" ng-bind="championName | addSpaces"></div>
+                <div class="champion-info-name" ng-bind="champion.name | addSpaces"></div>
             </div>
         </div>
     </div>

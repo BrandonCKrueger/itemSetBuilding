@@ -15,8 +15,9 @@
                 onEnter: onEnter
             });
             
-        function onEnter($state, bannerManager) {
-            bannerManager.getCurrentChampion($state.params.championName);
+        function onEnter($state, staticDataService, bannerManager) {
+            // var champion = staticDataService.getChampionByName($state.params.championName);
+            // bannerManager.setCurrentChampion(champion);
         }
     }
 

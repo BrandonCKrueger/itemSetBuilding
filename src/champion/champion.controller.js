@@ -7,6 +7,7 @@
 
     function ChampionController($stateParams, staticDataService, itemSetDetailsService) {
         var vm = this;
+        vm.starShadeClass = starShadeClass;
 
         staticDataService.getChampionByName($stateParams.championName).then(function(champion) {
             itemSetDetailsService.getItemBuildsByChampionId(champion.id).then(function(response) {
@@ -14,7 +15,8 @@
                 for(var i = 0; i < response.length; i++) {
                     builds.push({
                         id: response[i]._id,
-                        rating: response[i].averageRating,
+                        role: response[i].role,
+                        averageRating: response[i].averageRating,
                         commentCount: response[i].commentCount,
                         title: response[i].itemSetDetails.title,
                         author: response[i].who.createdBy.user,
@@ -35,7 +37,15 @@
             console.log({'Error': response});
         });
 
-        console.log('Looking for Champions: ' + $stateParams.championName);
+        function starShadeClass(averageRating, lowerBound) {
+            if (averageRating < lowerBound + 0.5) {
+                return 'fa-star-o';
+            } else if (averageRating < lowerBound + 1) {
+                return 'fa-star-half-o';
+            } else {
+                return 'fa-star';
+            }
+        }
     }
 
 }(window.angular));

@@ -9,6 +9,8 @@
         var factory = {
             getItemBuildById: getItemBuildById,
 
+            getTopBuildsByChampionName: getTopBuildsByChampionName,
+            getTopBuildsByChampionId: getTopBuildsByChampionId,
             getItemBuildsByChampionId: getItemBuildsByChampionId,
 			getItemBuildsByUserId: getItemBuildsByUserId,
 			getItemBuildsByUserName: getItemBuildsByUserName,
@@ -25,6 +27,74 @@
             $http({
                 method: 'GET',
                 url: apiConfig.domain + '/api/itemSetBuild/' + buildId
+            }).then(function(response) {
+                if (response.status === 200) {
+                    deferred.resolve(response.data);
+                } else {
+                    deferred.reject(response.data);
+                }
+            }).catch(function(error) {
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        }
+
+        function getTopBuildsByChampionName(championName, limit) {
+            var deferred = $q.defer();
+
+            if (!limit) {
+                limit = 1;
+            }
+
+            $http({
+                method: 'POST',
+                url: apiConfig.domain + '/api/itemSetBuilds',
+                params: {championName: championName},
+                data: {
+                    options: {
+                        limit: limit,
+                        skip: 0,
+                        sort: {
+                            field: "averageRating",
+                            direction: -1
+                        }
+                    }
+                }
+            }).then(function(response) {
+                if (response.status === 200) {
+                    deferred.resolve(response.data);
+                } else {
+                    deferred.reject(response.data);
+                }
+            }).catch(function(error) {
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        }
+
+        function getTopBuildsByChampionId(championId, limit) {
+            var deferred = $q.defer();
+
+            if (!limit) {
+                limit = 1;
+            }
+
+            $http({
+                method: 'POST',
+                url: apiConfig.domain + '/api/itemSetBuilds',
+                params: {championId: championId},
+                data: {
+                    options: {
+                        limit: limit,
+                        skip: 0,
+                        sort: {
+                            field: "averageRating",
+                            direction: -1
+                        }
+                    }
+                }
             }).then(function(response) {
                 if (response.status === 200) {
                     deferred.resolve(response.data);
@@ -142,7 +212,8 @@
                 'mode': itemSetDetails.mode,
                 'priority': itemSetDetails.priority,
                 'sortrank': itemSetDetails.sortrank,
-                'blocks': itemSetDetails.blocks
+                'blocks': itemSetDetails.blocks,
+                'authorNotes': itemSetDetails.authorNotes
             };
             
             $http({

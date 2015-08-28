@@ -39,7 +39,6 @@
         }
         
         function getCredentials() {
-            console.log('jojo');
             var deferred = $q.defer();
 
             $http({

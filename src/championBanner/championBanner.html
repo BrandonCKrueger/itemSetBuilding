@@ -1,21 +1,33 @@
 <div class="champion-banner">
-    <img ng-src="./images/{{championBannerVm.champion.name}}_Splash_0.jpg" style="margin-top: -50px; width: 100%;" />
+    <img ng-src="./images/{{championBannerVm.build.champion.championName}}_Splash_0.jpg" style="margin-top: -50px; width: 100%;" />
     <div>
-        <img class="champion-portrait" ng-src="./images/{{championBannerVm.champion.name}}_0.jpg" />
+        <img class="champion-portrait" ng-src="./images/{{championBannerVm.build.champion.championName}}_0.jpg" />
         <section class="champion-details">
-            <div class="champion-details-name" ng-bind="championBannerVm.build.championName"></div>
-            <div class="champion-details-top-set"  ng-bind="championBannerVm.build.title"></div>
-            <div class="champion-details-top-set-info">
+            <div class="champion-details-name" ng-bind="championBannerVm.build.champion.championName"></div>
+            <div class="champion-details-top-set" ng-if="!championBannerVm.build.noData">
+                <a ui-sref="build({buildId: championBannerVm.build._id})">
+                    <i class="fa fa-link"></i>
+                    <span ng-bind="championBannerVm.build.itemSetDetails.title"></span>
+                </a>
+            </div>
+            <div class="champion-details-top-set-info" ng-if="!championBannerVm.build.noData">
+                <span ng-bind="::championBannerVm.build.role"></span>
+                <span class="text-spacer">|</span>
                 <span class="champion-details-top-set-info-rating">
-                    <i class="fa fa-star fa-1"></i>
-                    <i class="fa fa-star fa-1"></i>
-                    <i class="fa fa-star fa-1"></i>
-                    <i class="fa fa-star fa-1"></i>
-                    <i class="fa fa-star fa-1"></i>
+                    <i class="fa fa-star fa-1"
+                       ng-class="championBannerVm.starShadeClass(championBannerVm.build.averageRating, 0)"></i>
+                    <i class="fa fa-star fa-1"
+                       ng-class="championBannerVm.starShadeClass(championBannerVm.build.averageRating, 1)"></i>
+                    <i class="fa fa-star fa-1"
+                       ng-class="championBannerVm.starShadeClass(championBannerVm.build.averageRating, 2)"></i>
+                    <i class="fa fa-star fa-1"
+                       ng-class="championBannerVm.starShadeClass(championBannerVm.build.averageRating, 3)"></i>
+                    <i class="fa fa-star fa-1"
+                       ng-class="championBannerVm.starShadeClass(championBannerVm.build.averageRating, 4)"></i>
                 </span>
-                <span>|</span>
+                <span class="text-spacer">|</span>
                 <span class="champion-details-top-set-info-comments">
-                    <span ng-bind="championBannerVm.build.commentCount"></span>
+                    <span ng-bind="::championBannerVm.build.commentCount"></span>
                     <span>Comments</span>
                     <i class="fa fa-comments fa-1"></i>
                 </span>
@@ -25,9 +37,13 @@
                     <i class="fa fa-plus fa-1"></i>
                     <span> | Create Item Set</span>
                 </button>
-                <button class="btn btn-xs btn-default copy-item-set">
+                <button class="btn btn-xs btn-default copy-item-set" ng-if="!championBannerVm.build.noData">
                     <i class="fa fa-files-o fa-1"></i>
                     <span> | Copy Item Set</span>
+                </button>
+                <button class="btn btn-xs btn-default download-item-set" ng-if="!championBannerVm.build.noData">
+                    <i class="fa fa-download fa-1"></i>
+                    <span> | Download Item Set</span>
                 </button>
             </div>
         </section>

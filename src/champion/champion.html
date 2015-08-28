@@ -10,17 +10,25 @@
                      alt="{{championName}}" />
                 <div class="build-details">
                     <div class="build-title" ng-bind="build.title | limitTo : 50"></div>
-                    <div class="build-author" ng-bind="build.author"></div>
+                    <div class="build-author">
+                        <span>Created By: </span>
+                        <span ng-bind="build.author"></span>
+                    </div>
                     <span class="build-date" ng-bind="build.date"></span>
                 </div>
                 <div class="build-social">
                     <div>
                         <span class="champion-details-top-set-info-rating">
-                            <i class="fa fa-star fa-1"></i>
-                            <i class="fa fa-star fa-1"></i>
-                            <i class="fa fa-star fa-1"></i>
-                            <i class="fa fa-star fa-1"></i>
-                            <i class="fa fa-star fa-1"></i>
+                            <i class="fa fa-star fa-1"
+                               ng-class="championVm.starShadeClass(build.averageRating, 0)"></i>
+                            <i class="fa fa-star fa-1"
+                               ng-class="championVm.starShadeClass(build.averageRating, 1)"></i>
+                            <i class="fa fa-star fa-1"
+                               ng-class="championVm.starShadeClass(build.averageRating, 2)"></i>
+                            <i class="fa fa-star fa-1"
+                               ng-class="championVm.starShadeClass(build.averageRating, 3)"></i>
+                            <i class="fa fa-star fa-1"
+                               ng-class="championVm.starShadeClass(build.averageRating, 4)"></i>
                         </span>
                     </div>
                     <div>
@@ -30,6 +38,12 @@
                     </div>
                 </div>
             </div>
+            <div class="ribbon top-lane" ng-if="build.role === 'Top Lane'"><span>Top Lane</span></div>
+            <div class="ribbon mid-lane" ng-if="build.role === 'Mid Lane'"><span>Mid Lane</span></div>
+            <div class="ribbon jungle" ng-if="build.role === 'Jungle'"><span>Jungle</span></div>
+            <div class="ribbon marksmen" ng-if="build.role === 'Marksmen'"><span>Marksmen</span></div>
+            <div class="ribbon support" ng-if="build.role === 'Support'"><span>Support</span></div>
+            <div class="ribbon general" ng-if="build.role === 'General'"><span>General</span></div>
         </div>
     </div>
 </section>

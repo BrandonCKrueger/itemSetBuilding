@@ -151,7 +151,7 @@
                 }
             }
         ];
-        var _champions = {'35':'Shaco','36':'DrMundo','33':'Rammus','34':'Anivia','39':'Irelia','157':'Yasuo','37':'Sona','38':'Kassadin','154':'Zac','150':'Gnar','43':'Karma','42':'Corki','41':'Gangplank','40':'Janna','201':'Braum','22':'Ashe','23':'Tryndamere','24':'Jax','25':'Morgana','26':'Zilean','27':'Singed','28':'Evelynn','29':'Twitch','3':'Galio','161':'Velkoz','2':'Olaf','1':'Annie','7':'Leblanc','30':'Karthus','6':'Urgot','32':'Amumu','5':'XinZhao','31':'Chogath','4':'TwistedFate','9':'FiddleSticks','8':'Vladimir','19':'Warwick','17':'Teemo','18':'Tristana','15':'Sivir','16':'Soraka','13':'Ryze','14':'Sion','11':'MasterYi','12':'Alistar','21':'MissFortune','20':'Nunu','107':'Rengar','106':'Volibear','105':'Fizz','104':'Graves','103':'Ahri','99':'Lux','102':'Shyvana','101':'Xerath','412':'Thresh','98':'Shen','222':'Jinx','96':'KogMaw','223':'TahmKench','92':'Riven','91':'Talon','90':'Malzahar','429':'Kalista','10':'Kayle','421':'RekSai','89':'Leona','79':'Gragas','117':'Lulu','114':'Fiora','78':'Poppy','115':'Ziggs','77':'Udyr','112':'Viktor','113':'Sejuani','110':'Varus','111':'Nautilus','119':'Draven','432':'Bard','245':'Ekko','82':'Mordekaiser','83':'Yorick','80':'Pantheon','81':'Ezreal','86':'Garen','84':'Akali','85':'Kennen','67':'Vayne','126':'Jayce','69':'Cassiopeia','127':'Lissandra','68':'Rumble','121':'Khazix','122':'Darius','120':'Hecarim','72':'Skarner','236':'Lucian','74':'Heimerdinger','75':'Nasus','238':'Zed','76':'Nidalee','134':'Syndra','133':'Quinn','59':'JarvanIV','58':'Renekton','57':'Maokai','56':'Nocturne','55':'Katarina','64':'LeeSin','62':'MonkeyKing','63':'Brand','268':'Azir','267':'Nami','60':'Elise','131':'Diana','61':'Orianna','266':'Aatrox','143':'Zyra','48':'Trundle','45':'Veigar','44':'Taric','51':'Caitlyn','53':'Blitzcrank','54':'Malphite','254':'Vi','50':'Swain'};
+        var _champions = [{'id':'1','name':'Annie'},{'id':'2','name':'Olaf'},{'id':'3','name':'Galio'},{'id':'4','name':'TwistedFate'},{'id':'5','name':'XinZhao'},{'id':'6','name':'Urgot'},{'id':'7','name':'Leblanc'},{'id':'8','name':'Vladimir'},{'id':'9','name':'FiddleSticks'},{'id':'10','name':'Kayle'},{'id':'11','name':'MasterYi'},{'id':'12','name':'Alistar'},{'id':'13','name':'Ryze'},{'id':'14','name':'Sion'},{'id':'15','name':'Sivir'},{'id':'16','name':'Soraka'},{'id':'17','name':'Teemo'},{'id':'18','name':'Tristana'},{'id':'19','name':'Warwick'},{'id':'20','name':'Nunu'},{'id':'21','name':'MissFortune'},{'id':'22','name':'Ashe'},{'id':'23','name':'Tryndamere'},{'id':'24','name':'Jax'},{'id':'25','name':'Morgana'},{'id':'26','name':'Zilean'},{'id':'27','name':'Singed'},{'id':'28','name':'Evelynn'},{'id':'29','name':'Twitch'},{'id':'30','name':'Karthus'},{'id':'31','name':'Chogath'},{'id':'32','name':'Amumu'},{'id':'33','name':'Rammus'},{'id':'34','name':'Anivia'},{'id':'35','name':'Shaco'},{'id':'36','name':'DrMundo'},{'id':'37','name':'Sona'},{'id':'38','name':'Kassadin'},{'id':'39','name':'Irelia'},{'id':'40','name':'Janna'},{'id':'41','name':'Gangplank'},{'id':'42','name':'Corki'},{'id':'43','name':'Karma'},{'id':'44','name':'Taric'},{'id':'45','name':'Veigar'},{'id':'48','name':'Trundle'},{'id':'50','name':'Swain'},{'id':'51','name':'Caitlyn'},{'id':'53','name':'Blitzcrank'},{'id':'54','name':'Malphite'},{'id':'55','name':'Katarina'},{'id':'56','name':'Nocturne'},{'id':'57','name':'Maokai'},{'id':'58','name':'Renekton'},{'id':'59','name':'JarvanIV'},{'id':'60','name':'Elise'},{'id':'61','name':'Orianna'},{'id':'62','name':'MonkeyKing'},{'id':'63','name':'Brand'},{'id':'64','name':'LeeSin'},{'id':'67','name':'Vayne'},{'id':'68','name':'Rumble'},{'id':'69','name':'Cassiopeia'},{'id':'72','name':'Skarner'},{'id':'74','name':'Heimerdinger'},{'id':'75','name':'Nasus'},{'id':'76','name':'Nidalee'},{'id':'77','name':'Udyr'},{'id':'78','name':'Poppy'},{'id':'79','name':'Gragas'},{'id':'80','name':'Pantheon'},{'id':'81','name':'Ezreal'},{'id':'82','name':'Mordekaiser'},{'id':'83','name':'Yorick'},{'id':'84','name':'Akali'},{'id':'85','name':'Kennen'},{'id':'86','name':'Garen'},{'id':'89','name':'Leona'},{'id':'90','name':'Malzahar'},{'id':'91','name':'Talon'},{'id':'92','name':'Riven'},{'id':'96','name':'KogMaw'},{'id':'98','name':'Shen'},{'id':'99','name':'Lux'},{'id':'101','name':'Xerath'},{'id':'102','name':'Shyvana'},{'id':'103','name':'Ahri'},{'id':'104','name':'Graves'},{'id':'105','name':'Fizz'},{'id':'106','name':'Volibear'},{'id':'107','name':'Rengar'},{'id':'110','name':'Varus'},{'id':'111','name':'Nautilus'},{'id':'112','name':'Viktor'},{'id':'113','name':'Sejuani'},{'id':'114','name':'Fiora'},{'id':'115','name':'Ziggs'},{'id':'117','name':'Lulu'},{'id':'119','name':'Draven'},{'id':'120','name':'Hecarim'},{'id':'121','name':'Khazix'},{'id':'122','name':'Darius'},{'id':'126','name':'Jayce'},{'id':'127','name':'Lissandra'},{'id':'131','name':'Diana'},{'id':'133','name':'Quinn'},{'id':'134','name':'Syndra'},{'id':'143','name':'Zyra'},{'id':'150','name':'Gnar'},{'id':'154','name':'Zac'},{'id':'157','name':'Yasuo'},{'id':'161','name':'Velkoz'},{'id':'201','name':'Braum'},{'id':'222','name':'Jinx'},{'id':'223','name':'TahmKench'},{'id':'236','name':'Lucian'},{'id':'238','name':'Zed'},{'id':'245','name':'Ekko'},{'id':'254','name':'Vi'},{'id':'266','name':'Aatrox'},{'id':'267','name':'Nami'},{'id':'268','name':'Azir'},{'id':'412','name':'Thresh'},{'id':'421','name':'RekSai'},{'id':'429','name':'Kalista'},{'id':'432','name':'Bard'}];
         var _itemTags = [
             "CooldownReduction",
             "Jungle",
@@ -280,6 +280,7 @@
       }};
             
         var factory = {
+            getRandomChampion: getRandomChampion,
             getChampions: getChampions,
             getChampionById: getChampionById,
             getChampionByName: getChampionByName,
@@ -291,6 +292,10 @@
             getModes: getModes
         };
         return factory;
+
+        function getRandomChampion() {
+            return _champions[Math.floor(Math.random() * _champions.length)];
+        }
 
         function getChampions() {
             var deferred = $q.defer();
@@ -319,12 +324,10 @@
                 deferred.reject('ChampionName needs to be a string');
             } else {
                 getChampions().then(function(champions) {
-                    for (var championId in champions) {
-                        if (champions[championId] === championName) {
-                            deferred.resolve({
-                                id: championId,
-                                name: champions[championId]
-                            });
+                    for(var i = 0; i < champions.length; i++) {
+                        if (champions[i].name === championName) {
+                            deferred.resolve(champions[i]);
+                            return true;
                         }
                     }
                 });
