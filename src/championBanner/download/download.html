@@ -1,0 +1,48 @@
+<div class="full-screen-overlay" ng-if="downloadVm.modalState"></div>
+<div class="row" ng-if="downloadVm.modalState">
+	<header class="col-xs-12">
+		<label>How to add this Item Build</label>
+	</header>
+	
+	<div class="col-xs-12">
+		<ol>
+			<li>
+				<div>Navigate to your league of legends directory.  Typically, this is located at either:</div>
+				<div class="well">Path location #1</div>
+				<div style="padding-left: 20px;">or at:</div>
+				<div class="well">Path Location #2</div>
+			</li>
+			<li>
+				<div>Once inside the League of Legends directory, navigate to:</div>
+				<div>
+					<span>League of Legends\Config\Champions\</span>
+					<span class="champion-key" ng-bind="downloadVm.build.champion.championName"></span>
+					<span>\Recommended\</span>
+				</div>
+				<div class="help-block">
+					<span>If this is your first download for </span>
+					<span ng-bind="downloadVm.build.champion.championName"></span>
+					<span> then you might need to create the \</span>
+					<span ng-bind="downloadVm.build.champion.championName"></span>
+					<span>\Recommended\ directory</span>
+				</div>
+			</li>
+			<li>
+				<div>Move the download item into that folder, and rename it if you'd like</div>
+				<div class="help-block">If the file didn't automatically download, click <a ng-href="{{downloadVm.downloadUrl}}" target="_blank">here</a></div>
+			</li>
+			<li>
+				<div>Restart League of Legends and enjoy your new build!</div>
+			</li>
+		</ol>
+	</div>
+	
+	<footer class="col-xs-12">
+		<button class="btn btn-default" ng-click="downloadVm.closeModal()">
+			<i class="fa fa-times"></i>
+			<span> | Close </span>
+		</button>
+	</footer>
+	
+	<i class="fa fa-times close-modal" ng-click="downloadVm.closeModal()"></i>
+</div>

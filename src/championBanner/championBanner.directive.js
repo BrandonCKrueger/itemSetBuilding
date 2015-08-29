@@ -89,7 +89,8 @@
         }
 
         function downloadItemSet() {
-            
+            vm.downloadBuild = true;
+            itemSetDetailsService.exportBuild(vm.build._id);
         }
 
         function starShadeClass(averageRating, lowerBound) {

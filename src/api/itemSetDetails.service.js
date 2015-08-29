@@ -244,24 +244,15 @@
         }
 
         function exportBuild(buildId) {
-            // todo: Does this need to be a window.location(..) ??
-            var deferred = $q.defer();
-            
-            $http({
-                method: 'GET',
-                url: apiConfig.domain + '/api/exportBuild/' + buildId
-            }).then(function(response) {
-                if (response.status === 200) {
-                    deferred.resolve(response.data);
-                } else {
-                    deferred.reject(response.data);
-                }
-            }).catch(function(error) {
-                deferred.reject(error);
-            });
-
-            return deferred.promise;
+            return false;
+            window.open(
+                apiConfig.domain + '/api/exportBuild/' + buildId,
+                '__blank',
+                null,
+                false
+            );
         }
+
     }
 
 }(window.angular));

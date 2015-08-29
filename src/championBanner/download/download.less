@@ -1,6 +1,14 @@
 .download-build {
+	z-index: 9999;
 	
 	.full-screen-overlay {
+		z-index: 1;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		
 		&.ng-enter,
 		&.ng-leave {
 			.ease-in-out-transition(0.5s);
@@ -16,11 +24,12 @@
 	}
 	
 	>.row {
+		z-index: 2;
 		position: absolute;
 		margin-right: 0;
 		right: 0;
 		top: 10%;
-		width: 500px;
+		width: 800px;
 		background-color: #fefefe;
 		box-shadow: 2px 2px 2px #888;
 		padding: 10px;
@@ -49,6 +58,26 @@
 		&.ng-enter.ng-enter-active {
 			top: 10%;
 		}
+		
+		ol {
+			li {
+				margin-bottom: 10px;
+				
+				.well {
+					padding: 7px;
+					margin-bottom: 0;
+				}
+				
+				.champion-key {
+					margin-left: -2px;
+					margin-right: -2px;
+					font-weight: bold;
+					color: @brand-warning;
+				}
+			}
+		}
+		
+		
 	}
 	
 	header {
