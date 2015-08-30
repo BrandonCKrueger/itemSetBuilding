@@ -1,12 +1,14 @@
 <div class="account">
 	<button class="btn btn-sm btn-default" ng-click="accountVm.showAccountInfo = true">
 		<i class="fa fa-user"></i>
-		<span> | My Account</span>
+		<span ng-if="accountVm.account.username" ng-bind="' | ' + accountVm.account.username"></span>
+		<span ng-if="!accountVm.account.username"> | My Account</span>
 	</button>
 </div>
 
 <div class="full-screen-overlay" ng-if="accountVm.showAccountInfo"></div>
 <div class="row" ng-if="accountVm.showAccountInfo">
+	<i class="fa fa-times close-modal" ng-click="accountVm.closeModal()"></i>
 	<header class="col-xs-12">
 		<label>My Account</label>
 	</header>
@@ -41,28 +43,18 @@
 		<div>
 			<strong>My Builds</strong>
 			<ul>
-				<li>
-					<span>Build Name</span>
-					<span>(Public)</span>
-				</li>
-				<li>
-					<span>Build Name</span>
-					<span>(Private)</span>
-				</li>
-				<li>
-					<span>Build Name</span>
-					<span>(Private)</span>
+				<li ng-repeat="build in accountVm.myBuilds">
+					<a href=""
+					   ng-click="accountVm.goToBuild(build)"
+					   ng-bind="build.itemSetDetails.title"></a>
+					<span>[</span>
+					<span ng-if="build.who.public">Public</span>
+					<span ng-if="!build.who.public">Private</span>
+					<span>]</span>
 				</li>
 			</ul>
 		</div>
 		<div>
-			<strong>My Favorite Builds</strong>
-			<ul>
-				<li>Build #1</li>
-				<li>Build #2</li>
-				<li>Build #3</li>
-			</ul>
-		</div>
 	</div>
 	
 	<footer class="col-xs-12" ng-if="!accountVm.processing">
@@ -83,6 +75,4 @@
 		<i class="fa fa-spinner fa-spin"></i>
 		<span>Signing In...</span>
 	</footer>
-	
-	<i class="fa fa-times close-modal" ng-click="accountVm.closeModal()"></i>
 </div>

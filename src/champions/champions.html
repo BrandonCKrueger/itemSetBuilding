@@ -5,7 +5,7 @@
              ng-repeat="champion in championsVm.championList"
              ui-sref="champion({championName: champion.name})">
             <div>
-                <img ng-src="http://lkimg.zamimg.com/images/v2/champions/icons/size100x100/{{champion.id}}.png" alt="{{champion.name}}" />
+                <img ng-src="./images/{{champion.name}}_Square_0.png" alt="{{champion.name}}" />
                 <div class="overlay"></div>
                 <div class="champion-info-name" ng-bind="champion.name | addSpaces"></div>
             </div>

@@ -226,6 +226,7 @@
                 role: itemSet.role,
                 authorNotes: itemSet.authorNotes
             };
+            console.log(payload);
             $http({
                 method: 'PUT',
                 url: apiConfig.domain + '/api/itemSetBuild/' + itemSet._id,

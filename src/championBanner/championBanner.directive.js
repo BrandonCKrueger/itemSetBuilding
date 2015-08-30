@@ -58,7 +58,7 @@
                     role: 'General',
                     authorNotes: ''
                 };
-                $state.go('build', {build: build});
+                $state.go('build', {buildId: null, build: build});
             } else {
                 console.log('Hey, you should not be able to do this!');
             }
@@ -82,7 +82,7 @@
                     authorNotes: ''
                 };
                 build.itemSetDetails.title = account.username + '\'s copy of ' + build.itemSetDetails.title;
-                $state.go('build', {build: build});
+                $state.go('build', {buildId: null, build: build});
             } else {
                 console.log('Hey, you should not be able to do this!');
             }
@@ -108,6 +108,7 @@
             if (params.buildId) {
                 itemSetDetailsService.getItemBuildById(params.buildId).then(function(builds) {
                     vm.build = builds[0];
+                    vm.build.noData = true;
                 }).catch(function(error) {
                     console.log({error: error});
                 });

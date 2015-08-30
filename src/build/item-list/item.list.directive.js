@@ -56,13 +56,13 @@
             }
         }
         
-        function filterItemList(item,v2,v3) {
-            if (vm.filter.name.length > 0) {
+        function filterItemList(item) {
+            if (vm.filter.name.length > 0 && item.name) {
                 if (item.name.indexOf(vm.filter.name) === -1) {
                     return false;
                 }
             }
-            if (vm.filter.tag.length > 0) {
+            if (vm.filter.tag.length > 0 && item.tags) {
                 if (item.tags.indexOf(vm.filter.tag) === -1) {
                     return false;
                 }
