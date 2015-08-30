@@ -56,7 +56,7 @@
                         limit: limit,
                         skip: 0,
                         sort: {
-                            field: "averageRating",
+                            field: 'averageRating',
                             direction: -1
                         }
                     }
@@ -90,7 +90,7 @@
                         limit: limit,
                         skip: 0,
                         sort: {
-                            field: "averageRating",
+                            field: 'averageRating',
                             direction: -1
                         }
                     }
@@ -245,7 +245,6 @@
         }
 
         function exportBuild(buildId) {
-            return false;
             window.open(
                 apiConfig.domain + '/api/exportBuild/' + buildId,
                 '__blank',

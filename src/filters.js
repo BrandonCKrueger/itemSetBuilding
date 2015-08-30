@@ -12,7 +12,7 @@
                 if (myString) {
                     myString = myString.replace(/([a-z])([A-Z])/g, '$1 $2');
                 }
-                return myString
+                return myString;
             }
         }
 

@@ -72,13 +72,13 @@
             }
 
             vm.itemSet.blocks.push({
-                "type": "",
-                "recMath": false,
-                "minSummonerLevel": -1,
-                "maxSummonerLevel": -1,
-                "showIfSummonerSpell": "",
-                "hideIfSummonerSpell": "",
-                "items": []
+                'type': '',
+                'recMath': false,
+                'minSummonerLevel': -1,
+                'maxSummonerLevel': -1,
+                'showIfSummonerSpell': '',
+                'hideIfSummonerSpell': '',
+                'items': []
             });
         }
         

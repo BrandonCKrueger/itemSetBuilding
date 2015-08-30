@@ -22,7 +22,7 @@
         vm.starShadeClass = starShadeClass;
         vm.champion = bannerManager.getCurrentChampion();
         
-        $scope.$on("$stateChangeSuccess", function updatePage(scope, state, params) {
+        $scope.$on('$stateChangeSuccess', function updatePage(scope, state, params) {
             if (state.name === 'build') {
                 stateChangedToBuild(params);
             } else if (state.name === 'champion') {

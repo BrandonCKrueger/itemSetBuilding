@@ -52,7 +52,7 @@
         
         function setItemFilter(filter) {
             if (filter) {
-                vm.filter.tag = filter.tag
+                vm.filter.tag = filter.tag;
             }
         }
         

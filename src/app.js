@@ -19,7 +19,5 @@
     function setDefaultRoute($urlRouterProvider) {
         $urlRouterProvider.when('', '/');
     }
-    
-    
 
 }(window.angular));

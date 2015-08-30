@@ -12,8 +12,8 @@
             getAccount: getAccount,
             getCredentials: getCredentials,
             register: register,
-			login: login,
-			logout: logout,
+            login: login,
+            logout: logout,
             addToMyBuilds: addToMyBuilds,
             addToMyFavBuilds: addToMyFavBuilds
         };

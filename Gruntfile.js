@@ -99,17 +99,6 @@ module.exports = function (grunt) {
             }
         },
 
-        jscs: {
-            all: [
-                'Gruntfile.js',
-                config.in.jsAppClientFiles,
-                config.in.jsAppTestFiles
-            ],
-            options: {
-                config: '.jscsrc'
-            }
-        },
-
         jshint: {
             all: [
                 'Gruntfile.js',
@@ -212,7 +201,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('analyze', ['jshint', 'jscs', 'karma:unit']);
+    grunt.registerTask('analyze', ['jshint', 'karma:unit']);
     grunt.registerTask('css', ['less', 'autoprefixer']);
     grunt.registerTask('compile', ['clean', 'copy', 'concat', 'css', 'html2js', 'analyze']);
     grunt.registerTask('optimize', ['ngAnnotate', 'uglify']);

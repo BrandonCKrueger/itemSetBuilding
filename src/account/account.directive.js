@@ -13,12 +13,12 @@
             template: $templateCache.get('account/account.html')
         };
     }
-    
+
     function AccountController($scope, $state, accountManager, itemSetDetailsService) {
         var vm = this;
         vm.account = null;
         vm.register = register;
-		vm.login = login;
+        vm.login = login;
         vm.logout = logout;
 		vm.closeModal = closeModal;
         vm.goToBuild = goToBuild;
@@ -32,13 +32,13 @@
             itemSetDetailsService.getItemBuildsByUserId(account.id).then(function(builds) {
                 vm.myBuilds = builds;
             }).catch(function(error) {
-            console.log(error);
+                console.log(error);
             });
         }).catch(function(error) {
             console.log('An error occured while getting initial credentials');
             console.log(error);
         });
-        
+
         function register() {
             accountManager.register(vm.email, vm.password, vm.username).then(function(account) {
                 vm.account = account;
@@ -71,7 +71,7 @@
             accountManager.logout().then(function() {
                 vm.account = null;
             }).catch(function(error) {
-               console.log('Error while logging out'); 
+               console.log('Error while logging out');
             });
         }
 
@@ -83,12 +83,12 @@
             $state.go('build', {buildId: build._id});
             closeModal();
         }
-        
+
         function goToRegister() {
             vm.registerScreen = true;
             vm.serverError = null;
         }
-        
+
         function goToLogin() {
             vm.registerScreen = false;
             vm.serverError = null;

@@ -34,7 +34,7 @@ module.exports = {
         jsAppClientFiles: [
             dirs.source + 'app.js',
             dirs.source + '**/*.js',
-            '!' + dirs.source + '**/*.spec.js'
+            dirs.source + '**/*.spec.js'
         ],
         jsAppTestFiles: dirs.source + '**/*.spec.js',
         jsThirdPartyClientFiles: [

@@ -1,3 +1,4 @@
+// jshint ignore: start
 (function (angular) {
     'use strict';
 
@@ -11,12 +12,12 @@
             { name: 'Howling Abyss', code: 'HA', image: 'maps.png'},
             { name: 'Twisted Treeline', code: 'TT', image: 'maps.png'},
             { name: 'Crystal Scar', code: 'CS', image: 'maps.png'}
-        ]
+        ];
         var _modes = [
             { name: 'Classic', code: 'CLASSIC', image: 'maps.png'},
             { name: 'ARAM', code: 'ARAM', image: 'maps.png'},
             { name: 'Dominion', code: 'ODIN', image: 'maps.png'},
-        ]
+        ];
         var _summonerSpells = [
             {
                 'id': 1,
@@ -3124,9 +3125,8 @@
 
             if (_summonerSpells) {
                 deferred.resolve(_summonerSpells);
-            } else {
-                // $http({});
             }
+            // todo: else - httpService
 
             return deferred.promise;
         }
@@ -3136,9 +3136,8 @@
 
             if (_maps) {
                 deferred.resolve(_maps);
-            } else {
-                // $http({});
             }
+            // todo: else - httpService
 
             return deferred.promise;
         }
@@ -3148,9 +3147,8 @@
 
             if (_modes) {
                 deferred.resolve(_modes);
-            } else {
-                // $http({});
             }
+            // todo: else - httpService
 
             return deferred.promise;
         }
@@ -3158,3 +3156,4 @@
     }
 
 }(window.angular));
+// jshint ignore: end
