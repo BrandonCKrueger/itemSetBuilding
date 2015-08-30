@@ -17,10 +17,13 @@
     function AccountController($scope, $state, accountManager, itemSetDetailsService) {
         var vm = this;
         vm.account = null;
+        vm.register = register;
 		vm.login = login;
         vm.logout = logout;
 		vm.closeModal = closeModal;
         vm.goToBuild = goToBuild;
+        vm.goToRegister = goToRegister;
+        vm.goToLogin = goToLogin;
         vm.showAccountInfo = false;
         vm.processing = false;
 
@@ -35,6 +38,18 @@
             console.log('An error occured while getting initial credentials');
             console.log(error);
         });
+        
+        function register() {
+            accountManager.register(vm.email, vm.password, vm.username).then(function(account) {
+                vm.account = account;
+                vm.myBuilds = [];
+                vm.processing = false;
+            }).catch(function(error) {
+                vm.serverError = error.error;
+                vm.processing = false;
+                console.log({error: error});
+            });
+        }
 
 		function login() {
             vm.processing = true;
@@ -44,11 +59,11 @@
                 itemSetDetailsService.getItemBuildsByUserId(account.id).then(function(builds) {
                     vm.myBuilds = builds;
                 }).catch(function(error) {
-                console.log(error);
+                    console.log({error: error});
                 });
             }).catch(function(error) {
-               console.log('Error while logging in'); 
-               console.log(error);
+                vm.processing = false;
+                vm.serverError = error.error;
             });
 		}
 
@@ -67,6 +82,16 @@
         function goToBuild(build) {
             $state.go('build', {buildId: build._id});
             closeModal();
+        }
+        
+        function goToRegister() {
+            vm.registerScreen = true;
+            vm.serverError = null;
+        }
+        
+        function goToLogin() {
+            vm.registerScreen = false;
+            vm.serverError = null;
         }
     }
 

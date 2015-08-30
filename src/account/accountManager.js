@@ -45,6 +45,8 @@
             userService.register(email, password, username).then(function(user) {
                 _account = user;
                 deferred.resolve(_account);
+            }).catch(function(error) {
+                deferred.reject(error);
             });
 
             return deferred.promise;
@@ -57,6 +59,10 @@
                 _account = user;
                 $rootScope.$broadcast('login', _account);
                 deferred.resolve(_account);
+            }).catch(function(error) {
+                deferred.reject({
+                    error: error.data
+                });
             });
 
             return deferred.promise;

@@ -26,7 +26,8 @@
                     username: username
                 }
             }).then(function(response) {
-                if (response.status === 200) {
+                console.log(response);
+                if (response.status === 200 && !response.data.error) {
                     deferred.resolve(response.data);
                 } else {
                     deferred.reject(response.data);
