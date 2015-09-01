@@ -7,8 +7,7 @@
 
     function apiConfig() {
         var factory = {
-            // todo - change domain back
-            // domain: 'http://localhost:3000',
+            // domain: 'http://localhost:3000'
             domain: 'http://api-itemsetbuilder.rhcloud.com'
         };
         
