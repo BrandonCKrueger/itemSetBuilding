@@ -8,15 +8,15 @@
 
     function staticDataService($http, $q) {
         var _maps = [
-            { name: 'Summoner\'s Rift', code: 'SR', image: 'maps.png'},
-            { name: 'Howling Abyss', code: 'HA', image: 'maps.png'},
-            { name: 'Twisted Treeline', code: 'TT', image: 'maps.png'},
-            { name: 'Crystal Scar', code: 'CS', image: 'maps.png'}
+            { name: 'Summoner\'s Rift', code: 'SR', image: 'summoners_rift.map.png'},
+            { name: 'Howling Abyss', code: 'HA', image: 'howling_abyss.map.png'},
+            { name: 'Twisted Treeline', code: 'TT', image: 'twisted_treeline.map.png'},
+            { name: 'Crystal Scar', code: 'CS', image: 'crystal_scar.map.png'}
         ];
         var _modes = [
-            { name: 'Classic', code: 'CLASSIC', image: 'maps.png'},
-            { name: 'ARAM', code: 'ARAM', image: 'maps.png'},
-            { name: 'Dominion', code: 'ODIN', image: 'maps.png'},
+            { name: 'Classic', code: 'CLASSIC', image: 'classic.mode.png'},
+            { name: 'ARAM', code: 'ARAM', image: 'aram.mode.png'},
+            { name: 'Dominion', code: 'ODIN', image: 'dominion.mode.png'},
         ];
         var _summonerSpells = [
             {

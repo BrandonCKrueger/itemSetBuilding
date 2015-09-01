@@ -34,58 +34,52 @@
 
         function createItemSet() {
             var account = accountManager.getAccount();
-            if (account.username && account.id) {
-                var build = {
-                    _id: 0,
-                    itemSetDetails: {
-                        title: account.username + '\'s New Build',
-                        type: 'custom',
-                        map: 'any',
-                        mode: 'any',
-                        priority: false,
-                        sortrank: 0,
-                        blocks: []
-                    },
-                    who: {
-                        createdDate: new Date(),
-                        createdBy: {
-                            userId: account.id,
-                            user: account.username
-                        },
-                        public: false
-                    },
-                    champion: vm.build.champion,
-                    role: 'General',
-                    authorNotes: ''
-                };
-                $state.go('build', {buildId: null, build: build});
-            } else {
-                console.log('Hey, you should not be able to do this!');
+            var buildTitle = 'New Build';
+            if (account.username) {
+                buildTitle = account.username + '\'s ' + buildTitle;
             }
+            var build = {
+                _id: 0,
+                itemSetDetails: {
+                    title: buildTitle,
+                    type: 'custom',
+                    map: 'any',
+                    mode: 'any',
+                    priority: false,
+                    sortrank: 0,
+                    blocks: []
+                },
+                who: {
+                    createdDate: new Date(),
+                    createdBy: null,
+                    public: false
+                },
+                champion: vm.build.champion,
+                role: 'General',
+                authorNotes: ''
+            };
+            $state.go('build', {buildId: null, build: build});
         }
 
         function copyItemSet() {
             var account = accountManager.getAccount();
-            if (account.username && account.id) {
-                var build = {
-                    itemSetDetails: vm.build.itemSetDetails,
-                    champion: vm.build.champion,
-                    role: vm.build.role,
-                    who: {
-                        createdDate: new Date(),
-                        createdBy: {
-                            userId: account.id,
-                            user: account.username
-                        },
-                        public: false
-                    },
-                    authorNotes: ''
-                };
-                build.itemSetDetails.title = account.username + '\'s copy of ' + build.itemSetDetails.title;
-                $state.go('build', {buildId: null, build: build});
-            } else {
-                console.log('Hey, you should not be able to do this!');
+            var buildTitle = 'Copy of ' + vm.build.itemSetDetails.title;
+            if (account.username) {
+                buildTitle = account.username + '\'s ' + buildTitle;
             }
+            var build = {
+                itemSetDetails: vm.build.itemSetDetails,
+                champion: vm.build.champion,
+                role: vm.build.role,
+                who: {
+                    createdDate: new Date(),
+                    createdBy: null,
+                    public: false
+                },
+                authorNotes: ''
+            };
+            build.itemSetDetails.title = buildTitle;
+            $state.go('build', {buildId: null, build: build});
         }
 
         function downloadItemSet() {

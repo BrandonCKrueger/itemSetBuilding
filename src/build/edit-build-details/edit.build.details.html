@@ -53,7 +53,10 @@
 			<div role="tabpanel" class="tab-pane tab-pane-game-modes" id="build-details-game-modes" ng-class="{'active': buildDetailsVm.tab == 'gameModes'}">
 				<div class="row">
 					<div class="col-xs-12">
-						<button class="btn btn-default pull-right" ng-click="buildDetailsVm.selectMode('any')">All Modes</button>
+						<button class="btn btn-default pull-right all-modes"
+								ng-click="buildDetailsVm.selectMode('any')">
+								<span>All Modes</span>
+						</button>
 					</div>
 				</div>
 				<div class="row">
@@ -62,7 +65,6 @@
 						 ng-class="{'selected': buildDetailsVm.isModeSelected(mode)}"
 						 ng-click="buildDetailsVm.selectMode(mode.code)">
 						<img ng-src="./images/{{mode.image}}">
-						<p ng-bind="mode.name"></p>
 						<i class="fa fa-check-circle"></i>
 					</div>
 				</div>
@@ -71,7 +73,10 @@
 			<div role="tabpanel" class="tab-pane tab-pane-maps" id="build-details-maps" ng-class="{'active': buildDetailsVm.tab == 'maps'}">
 				<div class="row">
 					<div class="col-xs-12">
-						<button class="btn btn-default pull-right" ng-click="buildDetailsVm.selectMap('any')">All Maps</button>
+						<button class="btn btn-default pull-right"
+								ng-click="buildDetailsVm.selectMap('any')">
+								<span>All Maps</span>
+						</button>
 					</div>
 				</div>
 				<div class="row">
@@ -80,7 +85,6 @@
 						 ng-class="{'selected': buildDetailsVm.isMapSelected(map)}"
 						 ng-click="buildDetailsVm.selectMap(map.code)">
 						<img ng-src="./images/{{map.image}}">
-						<p ng-bind="map.name"></p>
 						<i class="fa fa-check-circle"></i>
 					</div>
 				</div>

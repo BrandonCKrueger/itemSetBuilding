@@ -7,6 +7,7 @@
 
     function BuildController($scope, $q, $state, $stateParams, $timeout, staticDataService, itemSetDetailsService, accountManager) {
         var vm = this;
+        vm.canSave = false;
         vm.summonerLevelRange = summonerLevelRange;
         vm.updateCount = updateCount;
         vm.addBlock = addBlock;
@@ -22,23 +23,28 @@
             itemSetDetailsService.getItemBuildById($stateParams.buildId).then(function(itemBuild) {
                 vm.itemSet = itemBuild[0];
                 updateEditableStatus(accountManager.getAccount());
-                $scope.$on('login', function(event, account) {
-                    updateEditableStatus(account);
-                });
-                $scope.$on('logout', function(event) {
-                    updateEditableStatus(null);
-                });
+                enableSave(accountManager.getAccount());
             }).catch(function(error) {
                 console.log({error: error});
             });
         } else if ($stateParams.build) {
             vm.itemSet = $stateParams.build;
             updateEditableStatus(accountManager.getAccount());
+            enableSave(accountManager.getAccount());
             vm.editDetails = true;
         } else {
             $state.go('champions');
         }
-        
+
+        $scope.$on('login', function(event, account) {
+            updateEditableStatus(account);
+            enableSave(account);
+        });
+        $scope.$on('logout', function(event) {
+            updateEditableStatus(null);
+            enableSave(null);
+        });
+
         staticDataService.getChampions().then(function(champions) {
             vm.championList = champions;
         });
@@ -67,11 +73,11 @@
         }
         
         function addBlock() {
-            if (vm.itemSet && !vm.itemSet.blocks) {
-                vm.itemSet.blocks = [];
+            if (vm.itemSet && !vm.itemSet.itemSetDetails.blocks) {
+                vm.itemSet.itemSetDetails.blocks = [];
             }
 
-            vm.itemSet.blocks.push({
+            vm.itemSet.itemSetDetails.blocks.push({
                 'type': '',
                 'recMath': false,
                 'minSummonerLevel': -1,
@@ -118,10 +124,26 @@
         }
         
         function updateEditableStatus(account) {
-            if (account && vm.itemSet.who.createdBy.userId === account.id) {
+            if(!vm.itemSet.who.createdBy) {
+                if (account && account.username) {
+                    vm.itemSet.who.createdBy = {
+                        userId: account.id,
+                        user: account.username
+                    };
+                }
+                vm.editable = true;
+            } else if (account && vm.itemSet.who.createdBy.userId === account.id) {
                 vm.editable = true;
             } else {
                 vm.editable = false;
+            }
+        }
+        
+        function enableSave(account) {
+            if (account && account.username) {
+                vm.canSave = true;
+            } else {
+                vm.canSave = false;
             }
         }
 
@@ -132,14 +154,14 @@
                     vm.saving = false;
                 }).catch(function(error) {
                     vm.saving = false;
-                    console.log(error);
+                    console.log({error: error});
                 });
             } else {
                 itemSetDetailsService.insertItemSetBuild(vm.itemSet).then(function(response) {
                     $state.go('build', {buildId: response.data._id});
                 }).catch(function(error) {
                     vm.saving = false;
-                    console.log(error);
+                    console.log({error: error});
                 });
             }
         }

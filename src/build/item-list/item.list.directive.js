@@ -58,7 +58,7 @@
         
         function filterItemList(item) {
             if (vm.filter.name.length > 0 && item.name) {
-                if (item.name.indexOf(vm.filter.name) === -1) {
+                if (item.name.toLowerCase().indexOf(vm.filter.name.toLowerCase()) === -1) {
                     return false;
                 }
             }

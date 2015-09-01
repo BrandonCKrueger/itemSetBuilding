@@ -186,7 +186,10 @@
                     championName: itemSet.champion.championName
                 },
                 role: itemSet.role,
-                authorNotes: itemSet.authorNotes
+                authorNotes: itemSet.authorNotes,
+                who: {
+                    public: itemSet.who.public
+                }
             };
 
             $http({
@@ -224,7 +227,10 @@
                     championName: itemSet.champion.championName
                 },
                 role: itemSet.role,
-                authorNotes: itemSet.authorNotes
+                authorNotes: itemSet.authorNotes,
+                who: {
+                    public: itemSet.who.public
+                }
             };
             console.log(payload);
             $http({

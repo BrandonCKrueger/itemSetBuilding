@@ -1,6 +1,8 @@
 <section class="container champion">
-    <h2>Champion Build List</h2>
     <div class="row">
+        <div class="item-set-info col-xs-12" ng-if="championVm.builds.length === 0">
+            <span>This champion does not have any builds yet, help out and <a href="" ng-click="championBannerVm.createItemSet()">create one now!</a></span>
+        </div>
         <div class="item-set-info col-xs-12"
              ng-repeat="build in championVm.builds"
              ui-sref="build({buildId: build.id})">

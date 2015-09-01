@@ -90,7 +90,7 @@
                                        ng-if="buildVm.editable"></i>
                                 </div>
                                 <i class="fa fa-times"
-                                   ng-if=""
+                                   ng-if="buildVm.editable"
                                    ng-click="buildVm.removeItemFromBlock(item, block)"></i>
                             </div>
                         </li>
@@ -164,13 +164,16 @@
                     </button>
                 </div>
                 <div class="col-xs-12">
-                    <textarea ng-bind="buildVm.authorNotes"></textarea>
+                    <textarea ng-model="buildVm.itemSet.authorNotes"></textarea>
                 </div>
                 <div class="col-xs-12">
-                    <button class="btn btn-default save-author-notes" ng-click="buildVm.saveItemSet()" ng-disabled="buildVm.saving">
+                    <button class="btn btn-default save-author-notes"
+                            ng-click="buildVm.saveItemSet()"
+                            ng-disabled="buildVm.saving || !buildVm.canSave">
                         <i class="fa fa-floppy-o"></i>
                         <span> | Save Build</span>
                     </button>
+                    <span class="text-danger" ng-if="!buildVm.canSave"> - You'll need to log in to be able to save a build</span>
                 </div>
             </header>
             
