@@ -13,6 +13,7 @@ Item Set Builds are guaranteed to exist on the following champions:
 * Annie
 * Shaco
 * Vladimir
+* Trundle
 
 Hopefully everything is easy and intuitive.  If you need any help, contact me at brandon.c.krueger@gmail.com.
 

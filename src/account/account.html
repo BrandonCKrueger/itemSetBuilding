@@ -41,7 +41,8 @@
 					   ng-model="accountVm.password"
 					   placeholder="Password"
 					   ng-disabled="accountVm.processing"
-					   ng-required="true" />
+					   ng-required="true"
+					   ng-keyup="$event.keyCode == 13 && accountVm.triggerLogin()" />
 			</div>
 			<div class="help-block">
 				<span>Don't have an account?</span>
@@ -99,7 +100,8 @@
 					   ng-disabled="accountVm.processing"
 					   ng-required="true"
 					   ng-minlength="8"
-					   ng-maxlength="32" />
+					   ng-maxlength="32"
+					   ng-keyup="$event.keyCode == 13 && accountVm.triggerLogin()" />
 				<span class="text-danger"
 					  ng-if="!accountVm.password ||
 					  		 accountVm.password.length < 8 ||
@@ -146,7 +148,8 @@
 			<i class="fa fa-times"></i>
 			<span> | Close </span>
 		</button>
-		<button class="btn btn-default"
+		<button id="loginButton"
+				class="btn btn-default"
 				ng-if="!accountVm.account && !accountVm.registerScreen"
 				ng-click="accountVm.login()"
 				ng-disabled="accountVm.loginForm.$invalid ||
@@ -155,7 +158,8 @@
 			<i class="fa fa-sign-in"></i>
 			<span> | Login</span>
 		</button>
-		<button class="btn btn-default"
+		<button id="registerButton"
+			    class="btn btn-default"
 				ng-if="!accountVm.account && accountVm.registerScreen"
 				ng-click="accountVm.register()"
 				ng-disabled="accountVm.registerForm.$invalid ||

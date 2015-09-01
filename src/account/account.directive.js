@@ -14,7 +14,7 @@
         };
     }
 
-    function AccountController($scope, $state, accountManager, itemSetDetailsService) {
+    function AccountController($scope, $state, $timeout, accountManager, itemSetDetailsService) {
         var vm = this;
         vm.account = null;
         vm.register = register;
@@ -26,6 +26,7 @@
         vm.goToLogin = goToLogin;
         vm.showAccountInfo = false;
         vm.processing = false;
+        vm.triggerLogin = triggerLogin;
 
         accountManager.getCredentials().then(function(account) {
             vm.account = account;
@@ -92,6 +93,18 @@
         function goToLogin() {
             vm.registerScreen = false;
             vm.serverError = null;
+        }
+        
+        function triggerLogin() {
+            $timeout(function() {
+                angular.element('#loginButton').trigger('click');
+            });
+        }
+        
+        function triggerRegister() {
+            $timeout(function() {
+                angular.element('#registerButton').trigger('click');
+            });
         }
     }
 

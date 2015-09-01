@@ -1,7 +1,8 @@
 <div class="full-screen-overlay"></div>
 <div class="row" id="itemList">
 	<header class="col-xs-12">
-		<input type="text"
+		<input id="itemListSearch"
+			   type="text"
 			   ng-model="itemListVm.filter.name"
 			   placeholder="Search for an item..." />
 		<button class="btn btn-default btn-xs"
@@ -20,7 +21,8 @@
 		<div class="item"
 				ng-repeat="item in itemListVm.items |
 					toArray |
-					filter: itemListVm.filterItemList"
+					filter: itemListVm.filterItemList |
+					orderBy: 'name'"
 				ng-click="itemListVm.selectItem(item)">
 			<img ng-src="//lkimg.zamimg.com/images/v2/items/icons/size64x64/{{item.id}}.png" />
 			<span class="item-info" ng-bind="item.name"></span>
